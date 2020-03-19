@@ -4,11 +4,11 @@
 
 Le serveur se compile avec la commande suivante :
 
-`` g++ server.cpp -o server.out ``
+`` make server ``
 
 Le client se compile avec la commande suivante :
 
-`` g++ client.cpp -o client.out ``
+`` make client ``
 
 ## Tester le serveur TCP
 
@@ -20,3 +20,5 @@ La commande suivante permet de tester le serveur :
 - Ajouter le client
 - Ajouter le multithread
 - Utiliser le mécanisme d'erreur C++
+- Implémenter une architecture orientée évenements
+- Ajouter le vérification de connexion et les reconnexions en cas de perte

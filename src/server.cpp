@@ -56,33 +56,28 @@ namespace TcpServer
         }
     }
 
-    static void Server::handleConnection(int clientSocketfd)
+    void Server::handleConnection(int clientSocketfd)
     {
         char buffer[256];
-        std::cout << "New client connected : " << std::endl;
+        std::cout << "New client connected with socket : " << clientSocketfd << std::endl;
 
         while(clientSocketfd >= 0)
         {
             readSocket(clientSocketfd, buffer);
-            writeSocket(clientSocketfd, buffer);
+            writeSocket(clientSocketfd, "Hello from server");
         }
     }
 
-    void static Server::readSocket(int socket, char *buffer)
+    void Server::readSocket(int socket, char *buffer)
     {
         ssize_t bytes_read = 0;
         
         //testing stuff, BUFSIZE = 4096
         printf("Received Socket # %d\nBuffer Size = %d\n", socket, BUFSIZE);
-        
-        bytes_read = recv(socket, buffer, BUFSIZE - 1, 0);
-        while (bytes_read > 0) {
-            buffer[bytes_read] = 0; // Null-terminate the buffer
-            printf("Buffer: %s\n", buffer);	
-            bytes_read = recv(socket, buffer, BUFSIZE - 1, 0);
 
-            std::cout << bytes_read << std::endl;
-        }
+        buffer[bytes_read] = 0; // Null-terminate the buffer	
+        bytes_read = recv(socket, buffer, BUFSIZE - 1, 0);
+        printf("Buffer content: %s\n", buffer);
 
         std::cout << "Fin de reception" << std::endl;
         if (bytes_read == -1) {
@@ -90,12 +85,10 @@ namespace TcpServer
         }
     }
 
-    void static Server::writeSocket(int socket, char *buffer)
+    void Server::writeSocket(int socket, std::string message)
     {
-        std::cout << "Send response" << std::endl;
-        
-        char *hello = "Hello from server"; 
-        int n = send(socket, hello, strlen(hello), 0);
+        std::cout << "Send response to client :" << socket << std::endl;
+        int n = send(socket, message.c_str(), message.length(), 0);
         if (n < 0) {
             throw "ERROR writing to socket";
         }

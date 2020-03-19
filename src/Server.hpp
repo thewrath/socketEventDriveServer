@@ -20,14 +20,13 @@ namespace TcpServer
         private :
             int serverSocketfd;
             sockaddr_in serverAddr;
-            char buffer[256];
             std::vector<std::thread> clientThreads;
 
             void initSocket(int);
             
             static void handleConnection(int);
             static void readSocket(int, char *);
-            static void writeSocket(int, char *);
+            static void writeSocket(int, std::string);
 
 
         public : 

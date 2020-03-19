@@ -1,4 +1,4 @@
-CFLAGS = -g -std=c++17 -fpermissive -pthread
+CFLAGS = -g -std=c++17 -fpermissive -pthread -Wall -Werror
 LIB_DIR = lib/
 LIBS= 
 SRC_DIR = src/
@@ -15,6 +15,14 @@ server: objects
 client: objects
 	@echo "** Building the client"
 	g++ -o $(BUILD_DIR)client.out client_main.o client.o $(CFLAGS) $(LIBS)
+
+run_server:
+	@echo "Start server"
+	./bin/server.out
+
+run_client:
+	@echo "Start client"
+	./bin/client.out
 	
 clean:
 	@echo "** Removing object files ..."
