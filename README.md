@@ -19,5 +19,4 @@ La commande suivante permet de tester le serveur :
 ## TODO :
 - Ajouter le client
 - Ajouter le multithread
-- Ajouter des classes et les principes POO
 - Utiliser le mécanisme d'erreur C++

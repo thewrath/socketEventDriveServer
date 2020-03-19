@@ -2,28 +2,39 @@
 #define SERVER_HPP
 
 #include <iostream>
-#include <string>
+#include <string.h>
+#include <thread>
+#include <vector>
 
 #include <stdio.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <errno.h>
 
-class Server
+namespace TcpServer 
 {
-    private :
-        int serverSocketfd;
-        sockaddr_in serverAddr;
-        char buffer[256];
+    class Server
+    {
+        private :
+            int serverSocketfd;
+            sockaddr_in serverAddr;
+            char buffer[256];
+            std::vector<std::thread> clientThreads;
 
-        void initSocket(int);
-        void readSocket(int, char *);
-        void writeSocket(int, char *);
+            void initSocket(int);
+            
+            static void handleConnection(int);
+            static void readSocket(int, char *);
+            static void writeSocket(int, char *);
 
-    public : 
-        Server(int);
-        void run();
+
+        public : 
+            Server(int);
+            ~Server();
+            void run();
+    };
 };
 
 #endif

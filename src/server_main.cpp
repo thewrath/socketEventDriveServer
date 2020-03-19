@@ -2,7 +2,7 @@
 
 int main()
 {
-    Server server(3333);
+    TcpServer::Server server(3333);
     server.run();
     return 0;
 }
