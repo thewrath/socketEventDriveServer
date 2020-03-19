@@ -14,7 +14,7 @@ Le client se compile avec la commande suivante :
 
 La commande suivante permet de tester le serveur : 
 
-`` curl -v telnet://127.0.0.1:3333 ``
+``telnet -r localhost 3333 ``
 
 ## TODO :
 - Ajouter le client
