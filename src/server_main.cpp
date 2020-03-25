@@ -1,8 +1,8 @@
-#include "Server.hpp"
+#include "Serveur.hpp"
 
 int main()
 {
-    TcpServer::Server server(3333);
-    server.run();
+    Communication::Serveur serveur(3333);
+    serveur.lancer();
     return 0;
 }

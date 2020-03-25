@@ -22,3 +22,4 @@ La commande suivante permet de tester le serveur :
 - Utiliser le mécanisme d'erreur C++
 - Implémenter une architecture orientée évenements
 - Ajouter le vérification de connexion et les reconnexions en cas de perte
+- Mécanisme de heartbeat pour éviter les deconnexion TCP
