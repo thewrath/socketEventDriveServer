@@ -93,6 +93,12 @@ namespace Communication
         
             std::thread client(Serveur::gererConnexion, priseClient);
             this->clients.push_back(std::move(client));
+            
+            for(std::thread & client : this->clients) {
+                if(client.joinable()) {
+                    client.join();
+                }
+            }
         }
 
         for(std::thread & client : this->clients) {
