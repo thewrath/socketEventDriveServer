@@ -10,7 +10,7 @@ objects:
 
 server: objects
 	@echo "** Building the server"
-	g++ -o $(BUILD_DIR)server.out server_main.o server.o $(CFLAGS) $(LIBS)
+	g++ -o $(BUILD_DIR)server.out server_main.o Communication.o $(CFLAGS) $(LIBS)
 
 client: objects
 	@echo "** Building the client"

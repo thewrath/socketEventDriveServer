@@ -1,8 +1,7 @@
-#include "Serveur.hpp"
+#include "Communication.hpp"
 
 int main()
 {
-    Communication::Serveur serveur(3333);
-    serveur.lancer();
+    Communication::Server server(3333);
     return 0;
 }
