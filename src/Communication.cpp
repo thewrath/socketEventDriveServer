@@ -13,7 +13,7 @@ namespace Communication
     Socket::Socket(unsigned int port)
     {
         this->description = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-        
+
         if (this->description < 0) {
             throw "Erreur initialisation socket.";
         }
@@ -28,11 +28,11 @@ namespace Communication
     void Socket::read(char *buffer)
     {
         ssize_t bytes_read = 0;
-        
+
         //testing stuff, BUFSIZE = 4096
         printf("Received Socket # %d\nBuffer Size = %d\n", this->description, BUFSIZE);
 
-        buffer[bytes_read] = 0; // Null-terminate the buffer	
+        buffer[bytes_read] = 0; // Null-terminate the buffer
         bytes_read = recv(this->description, buffer, BUFSIZE - 1, 0);
         printf("Buffer content: %s\n", buffer);
 
@@ -94,7 +94,7 @@ namespace Communication
                     } else{
                         handleClientFileDescriptorActivity(i);
                     }
-                } catch (SocketException e) {
+                } catch (SocketException& e) {
                     this->raiseSocketExceptionEvent(e);
                 }
             }
@@ -240,7 +240,7 @@ namespace Communication
     {
         std::cout << "Client sending data." << std::endl;
     }
-    
+
     void Server::onDataReceive(int fd, const std::vector<char>& data)
     {
         std::cout << "Received from fd " << fd << ": ";
