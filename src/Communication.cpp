@@ -241,14 +241,14 @@ namespace Communication
 
     }
 
-    ThreadPool::ThreadPool(int number_of_thread)
+    ThreadPool::ThreadPool(int number_of_thread, processPacket process)
     {
         std::cout << "Thread pool initialize with " << std::to_string(number_of_thread) <<  std::endl;
         // Initialize all availables threads
         for(int i = 0; i < number_of_thread; i++)
         {  
             // Create new thread and share the mutex and the queue 
-            this->threads.push_back(std::thread(ThreadPool::threadWork, i, &this->condition, &this->queueMutex, &this->packets));
+            this->threads.push_back(std::thread(ThreadPool::threadWork, i, &this->condition, &this->queueMutex, &this->packets, process));
         }
     }
     
@@ -263,10 +263,24 @@ namespace Communication
 
     void ThreadPool::shutdown()
     {
-        
+        // {
+        //     unique_lock<mutex> lock(this->queueMutex);
+        //     this->terminate_pool = true;
+        // }
+
+        // this->condition.notify_all(); // wake up all threads.
+
+        // // Join all threads.
+        // for(std::thread &every_thread : this->threads)
+        // {   
+        //     every_thread.join();
+        // }
+
+        // this->threads.empty();  
+        // stopped = true; // use this flag in destructor, if not set, call shutdown() 
     }
 
-    void ThreadPool::threadWork(int threadID, std::condition_variable* condition, std::mutex* queueMutex, std::queue<Packet>* packets)
+    void ThreadPool::threadWork(int threadID, std::condition_variable* condition, std::mutex* queueMutex, std::queue<Packet>* packets, processPacket process)
     {
         while(true){
             {
@@ -277,13 +291,12 @@ namespace Communication
                 Packet packet = packets->front();
                 packets->pop();
 
-                std::cout << std::to_string(threadID) << std::endl;
-                std::cout << packet.data << std::endl;
+                process(packet);
             }
         }
     }
 
-    Server::Server(unsigned int port, int number_of_thread) : masterSocket(port), threadPool(number_of_thread)
+    Server::Server(unsigned int port, int number_of_thread, processPacket process) : masterSocket(port), threadPool(number_of_thread, process)
     {
         this->masterSocket.addEventListener(this);
         this->masterSocket.run();

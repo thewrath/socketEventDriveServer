@@ -92,6 +92,8 @@ namespace Communication
             ClientSocket(unsigned int);
     };
 
+    typedef void (* processPacket)(Packet packet);
+
     class ThreadPool {
         private:
             std::vector<std::thread> threads;
@@ -100,11 +102,11 @@ namespace Communication
             std::condition_variable condition;
 
         public:
-            ThreadPool(int);
+            ThreadPool(int, processPacket);
             void addPacket(Packet);
             void shutdown();
 
-            static void threadWork(int, std::condition_variable*, std::mutex*, std::queue<Packet>*);
+            static void threadWork(int, std::condition_variable*, std::mutex*, std::queue<Packet>*, processPacket);
     };
 
     class Server : public ISocketEventListener
@@ -114,7 +116,7 @@ namespace Communication
             ThreadPool threadPool;
 
         public:
-            Server(unsigned int, int);
+            Server(unsigned int, int, processPacket);
 
             void onConnect(int fd) override;
             void onDisconnect(int fd) override;
