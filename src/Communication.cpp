@@ -241,7 +241,49 @@ namespace Communication
 
     }
 
-    Server::Server(unsigned int port) : masterSocket(port)
+    ThreadPool::ThreadPool(int number_of_thread)
+    {
+        std::cout << "Thread pool initialize with " << std::to_string(number_of_thread) <<  std::endl;
+        // Initialize all availables threads
+        for(int i = 0; i < number_of_thread; i++)
+        {  
+            // Create new thread and share the mutex and the queue 
+            this->threads.push_back(std::thread(ThreadPool::threadWork, i, &this->condition, &this->queueMutex, &this->packets));
+        }
+    }
+    
+    void ThreadPool::addPacket(Packet packet)
+    {
+        {
+            std::unique_lock<std::mutex> lock(queueMutex);
+            this->packets.push(packet);
+        }
+        this->condition.notify_one();
+    }
+
+    void ThreadPool::shutdown()
+    {
+        
+    }
+
+    void ThreadPool::threadWork(int threadID, std::condition_variable* condition, std::mutex* queueMutex, std::queue<Packet>* packets)
+    {
+        while(true){
+            {
+                std::unique_lock<std::mutex> lock(*queueMutex);
+                // The thread block when mutex is lock or queue is empty
+                condition->wait(lock, [packets]{return !packets->empty();});
+                // condition->wait(lock, []{return !packets->empty() || terminate_pool});
+                Packet packet = packets->front();
+                packets->pop();
+
+                std::cout << std::to_string(threadID) << std::endl;
+                std::cout << packet.data << std::endl;
+            }
+        }
+    }
+
+    Server::Server(unsigned int port, int number_of_thread) : masterSocket(port), threadPool(number_of_thread)
     {
         this->masterSocket.addEventListener(this);
         this->masterSocket.run();
@@ -265,11 +307,9 @@ namespace Communication
     void Server::onDataReceive(int fd, const std::vector<char>& data)
     {
         std::cout << "Received from fd " << fd << ": ";
-        for (std::vector<char>::const_iterator i = data.begin(); i != data.end(); i++) {
-            std::cout << *i;
-        }
+        this->threadPool.addPacket(Packet{fd, std::string(data.begin(), data.end())});
 
-        std::cout << std::endl;
+    
     }
 
     void Server::onSocketException(SocketException exception)

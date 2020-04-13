@@ -15,6 +15,9 @@
 
 #include <sys/epoll.h>
 #include <fcntl.h>
+#include <mutex>
+#include <condition_variable>
+#include <queue>
 
 namespace Communication 
 {
@@ -39,6 +42,7 @@ namespace Communication
 
     struct Packet
     {
+        int description;
         std::string data;
     };
 
@@ -88,13 +92,30 @@ namespace Communication
             ClientSocket(unsigned int);
     };
 
+    class ThreadPool {
+        private:
+            std::vector<std::thread> threads;
+            std::queue<Packet> packets;
+            std::mutex queueMutex;
+            std::condition_variable condition;
+
+        public:
+            ThreadPool(int);
+            void addPacket(Packet);
+            void shutdown();
+
+            static void threadWork(int, std::condition_variable*, std::mutex*, std::queue<Packet>*);
+    };
+
     class Server : public ISocketEventListener
     {
         private:
             ServerSocket masterSocket;
+            ThreadPool threadPool;
 
         public:
-            Server(unsigned int);
+            Server(unsigned int, int);
+
             void onConnect(int fd) override;
             void onDisconnect(int fd) override;
             void onDataSend(int fd, const std::vector<char>& data) override;
