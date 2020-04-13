@@ -14,6 +14,7 @@
 #include <errno.h>
 
 #include <sys/epoll.h>
+#include <fcntl.h>
 
 namespace Communication 
 {
@@ -51,6 +52,8 @@ namespace Communication
             Socket(unsigned int);
             void read(char *);
             void write(Packet);
+
+            static void setNonBlocking(int);
             
     };
 

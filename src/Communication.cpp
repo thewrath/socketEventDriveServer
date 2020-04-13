@@ -51,8 +51,29 @@ namespace Communication
         }
     }
 
+    void Socket::setNonBlocking(int fd) {
+        int options;
+        if ((options = fcntl(fd, F_GETFL)) < 0) {
+            throw SocketException("F_GETFL failed.");
+        }
+        options = options | O_NONBLOCK;
+        if (fcntl(fd, F_SETFL, options) < 0) {
+            throw SocketException("F_SETFL failed.");
+        }
+    }
+
     ServerSocket::ServerSocket(unsigned int port) : Socket(port)
     {
+
+        Socket::setNonBlocking(this->description);
+
+        // FIX ME : better OOP style
+        int optval = 1;
+        int optlen = sizeof(optval);
+        if(setsockopt(this->description, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
+            throw "Cannot set option on socket";
+        }
+
         if ((this->epollFd = epoll_create1(0)) < 0) {
             throw "Failed to create epoll instance";
         }
@@ -110,8 +131,8 @@ namespace Communication
             throw SocketException("Invalid file descriptor from accepted connection ");
         }
 
-        // Set fd to be non blocking
-        // setNonBlocking(fd);
+        // Set fd to be non blocking, this function raised error if failed (they are catch in the main loop)
+        Socket::setNonBlocking(fd);
 
         // Monitor read operations, set edge-triggered
         this->ev.events = EPOLLIN | EPOLLOUT | EPOLLET;
