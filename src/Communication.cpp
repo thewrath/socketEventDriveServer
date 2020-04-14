@@ -15,7 +15,7 @@ namespace Communication
         this->description = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
         if (this->description < 0) {
-            throw "Erreur initialisation socket.";
+            throw SocketException("Erreur initialisation socket.");
         }
 
         // Structure contenant les informations "reseaux" de la socket
@@ -25,29 +25,29 @@ namespace Communication
 
     }
 
-    void Socket::read(char *buffer)
-    {
-        ssize_t bytes_read = 0;
+    // void Socket::read(char *buffer)
+    // {
+    //     ssize_t bytes_read = 0;
 
-        //testing stuff, BUFSIZE = 4096
-        printf("Received Socket # %d\nBuffer Size = %d\n", this->description, BUFSIZE);
+    //     //testing stuff, BUFSIZE = 4096
+    //     printf("Received Socket # %d\nBuffer Size = %d\n", this->description, BUFSIZE);
 
-        buffer[bytes_read] = 0; // Null-terminate the buffer
-        bytes_read = recv(this->description, buffer, BUFSIZE - 1, 0);
-        printf("Buffer content: %s\n", buffer);
+    //     buffer[bytes_read] = 0; // Null-terminate the buffer
+    //     bytes_read = recv(this->description, buffer, BUFSIZE - 1, 0);
+    //     printf("Buffer content: %s\n", buffer);
 
-        std::cout << "Fin de reception" << std::endl;
-        if (bytes_read == -1) {
-            throw "Socket recv failed";
-        }
-    }
+    //     std::cout << "Fin de reception" << std::endl;
+    //     if (bytes_read == -1) {
+    //         throw "Socket recv failed";
+    //     }
+    // }
 
     void Socket::write(Packet packet)
     {
         std::cout << "Send response to client :" << packet.data << std::endl;
-        int n = send(this->description, packet.data.c_str(), packet.data.length(), 0);
+        int n = send(packet.description, packet.data.c_str(), packet.data.length(), 0);
         if (n < 0) {
-            throw "ERROR writing to socket";
+            throw SocketException("ERROR writing to socket");
         }
     }
 
@@ -71,15 +71,15 @@ namespace Communication
         int optval = 1;
         int optlen = sizeof(optval);
         if(setsockopt(this->description, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
-            throw "Cannot set option on socket";
+            throw SocketException("Cannot set option on socket");
         }
 
         if ((this->epollFd = epoll_create1(0)) < 0) {
-            throw "Failed to create epoll instance";
+            throw SocketException("Failed to create epoll instance");
         }
 
         if (bind(this->description, (struct sockaddr*) &this->address, sizeof(this->address))) {
-            throw "Impossible d'ouvrir le socket.";
+            throw SocketException("Impossible d'ouvrir le socket.");
         }
 
     }
@@ -87,13 +87,13 @@ namespace Communication
     void ServerSocket::run()
     {
         if (listen(this->description, 10) < 0) {
-            throw "Failed to start listening.";
+            throw SocketException("Failed to start listening.");
         }
 
         this->ev.data.fd = this->description;
         this->ev.events = EPOLLIN | EPOLLPRI | EPOLLERR | EPOLLHUP | EPOLLET;
         if (epoll_ctl(this->epollFd, EPOLL_CTL_ADD, this->description, &this->ev) < 0) {
-            throw "Failed to configure epoll file descriptor";
+            throw SocketException("Failed to configure epoll file descriptor");
         }
 
         while (this->running) {
@@ -104,7 +104,7 @@ namespace Communication
             if (nfds == -1) {
                 close(nfds);
                 close(this->description);
-                throw "epoll_wait() failed to wait for events.";
+                throw SocketException("epoll_wait() failed to wait for events.");
             }
 
             // Iterate all events
@@ -134,7 +134,7 @@ namespace Communication
         // Set fd to be non blocking, this function raised error if failed (they are catch in the main loop)
         Socket::setNonBlocking(fd);
 
-        // Monitor read operations, set edge-triggered
+        // Monitor read and write operations, set edge-triggered
         this->ev.events = EPOLLIN | EPOLLOUT | EPOLLET;
         this->ev.data.fd = fd;
 
@@ -167,7 +167,6 @@ namespace Communication
             } else if (result == 0) {
                 close(events[index].data.fd);
                 this->raiseClientDisconnectedEvent(events[index].data.fd);
-
             } else {
                 ev.events = EPOLLOUT | EPOLLIN | EPOLLET;
                 std::vector<char> data(buffer, buffer + result);
@@ -327,8 +326,6 @@ namespace Communication
     {
         std::cout << "Received from fd " << fd << ": ";
         this->threadPool.addPacket(Packet{fd, std::string(data.begin(), data.end())});
-
-    
     }
 
     void Server::onSocketException(SocketException exception)
