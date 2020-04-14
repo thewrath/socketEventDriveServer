@@ -8,6 +8,6 @@ void WTDPacketProcessing(Communication::Packet packet)
 
 int main()
 {
-    Communication::Server server(3133, std::thread::hardware_concurrency(), (Communication::processPacket) WTDPacketProcessing);
+    Communication::Server server(3333, std::thread::hardware_concurrency(), (Communication::processPacket) WTDPacketProcessing);
     return 0;
 }

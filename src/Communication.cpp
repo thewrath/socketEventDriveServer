@@ -248,8 +248,15 @@ namespace Communication
         for(int i = 0; i < number_of_thread; i++)
         {  
             // Create new thread and share the mutex and the queue 
-            this->threads.push_back(std::thread(ThreadPool::threadWork, i, &this->condition, &this->queueMutex, &this->packets, process));
+            this->threads.push_back(std::thread(ThreadPool::threadWork, i, &this->terminate_pool, &this->condition, &this->queueMutex, &this->packets, process));
         }
+    }
+
+    ThreadPool::~ThreadPool()
+    {
+        if(this->stopped == false){
+            this->shutdown();
+        }    
     }
     
     void ThreadPool::addPacket(Packet packet)
@@ -263,31 +270,30 @@ namespace Communication
 
     void ThreadPool::shutdown()
     {
-        // {
-        //     unique_lock<mutex> lock(this->queueMutex);
-        //     this->terminate_pool = true;
-        // }
+        {
+            std::unique_lock<std::mutex> lock(this->queueMutex);
+            this->terminate_pool = true;
+        }
 
-        // this->condition.notify_all(); // wake up all threads.
+        this->condition.notify_all(); // wake up all threads.
 
-        // // Join all threads.
-        // for(std::thread &every_thread : this->threads)
-        // {   
-        //     every_thread.join();
-        // }
+        // Join all threads.
+        for(std::thread &every_thread : this->threads)
+        {   
+            every_thread.join();
+        }
 
-        // this->threads.empty();  
-        // stopped = true; // use this flag in destructor, if not set, call shutdown() 
+        this->threads.clear();  
+        this->stopped = true; // use this flag in destructor, if not set, call shutdown() 
     }
 
-    void ThreadPool::threadWork(int threadID, std::condition_variable* condition, std::mutex* queueMutex, std::queue<Packet>* packets, processPacket process)
+    void ThreadPool::threadWork(int threadID, bool* terminate_pool, std::condition_variable* condition, std::mutex* queueMutex, std::queue<Packet>* packets, processPacket process)
     {
         while(true){
             {
                 std::unique_lock<std::mutex> lock(*queueMutex);
                 // The thread block when mutex is lock or queue is empty
-                condition->wait(lock, [packets]{return !packets->empty();});
-                // condition->wait(lock, []{return !packets->empty() || terminate_pool});
+                condition->wait(lock, [packets, terminate_pool]{return !packets->empty() || *terminate_pool; });
                 Packet packet = packets->front();
                 packets->pop();
 

@@ -101,12 +101,16 @@ namespace Communication
             std::mutex queueMutex;
             std::condition_variable condition;
 
+            bool terminate_pool = false;
+            bool stopped = false;
+
         public:
             ThreadPool(int, processPacket);
+            ~ThreadPool();
             void addPacket(Packet);
             void shutdown();
 
-            static void threadWork(int, std::condition_variable*, std::mutex*, std::queue<Packet>*, processPacket);
+            static void threadWork(int, bool*, std::condition_variable*, std::mutex*, std::queue<Packet>*, processPacket);
     };
 
     class Server : public ISocketEventListener
