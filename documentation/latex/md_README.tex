@@ -1,0 +1,23 @@
+\subsection*{Compiler les programmes}
+
+Créez le dossier bin
+
+{\ttfamily mkdir bin}
+
+Le serveur se compile avec la commande suivante \+:
+
+{\ttfamily make server}
+
+\subsection*{Tester le serveur T\+CP}
+
+La commande suivante permet de tester le serveur \+:
+
+{\ttfamily telnet -\/r localhost 3333}
+
+\subsection*{Utilisation de E\+P\+O\+LL}
+
+La librairie système E\+P\+O\+LL (sur Linux) est utilisée pour offrir une gestion asynchrone des sockets. L\textquotesingle{}application demande à E\+P\+O\+LL de la notifiée des différents événents liés à certains descripteurs de fichiers (les sockets nottament). L\textquotesingle{}intêret dans notre application est d\textquotesingle{}avoir le thread principal qui est responsable de la gestion de l\textquotesingle{}ensemble des E/S (Connexion entrante, communication vers n clients, socket sortant pour les logs et l\textquotesingle{}interface graphique...). Lorsque que le thread principal à un travail lourd à éffectuer (autre que la gestion d\textquotesingle{}une E/S) il le délègue un thread provenant d\textquotesingle{}un pool de threads (avec une taille limité). L\textquotesingle{}idée, ici, n\textquotesingle{}est pas de viser les performances, mais de mettre en place un architecture autre que le simple un thread/client. L\textquotesingle{}architecture présentée ici a l\textquotesingle{}avantage de rassembler l\textquotesingle{}ensemble de la gestion des E/S à un même endroit ce qui abstrait le reste du programme de cette dernière (les sockets peuvent être remplacé par autre chose, ou un portage sur Windows serait plus évident).
+
+\subsection*{Utilisation d\textquotesingle{}un pool de thread}
+
+Le système met aussi en place un thread de pool, l\textquotesingle{}interet de ce genre de mécanisme est d\textquotesingle{}avoir une gestion plus fine de nos threads, on peut ainsi aisément recycler des threads plutôt que de les détruire et les reconstruire (qui sont des instructions coûteuses). 
