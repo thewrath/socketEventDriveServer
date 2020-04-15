@@ -1,5 +1,5 @@
-#ifndef SERVER_HPP
-#define SERVER_HPP
+#ifndef COMMUNICATION_HPP
+#define COMMUNICATION_HPP
 
 #include <iostream>
 #include <string.h>

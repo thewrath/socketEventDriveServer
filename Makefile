@@ -1,4 +1,4 @@
-CFLAGS = -g -std=c++17 -fpermissive -pthread -Wall -Werror
+CFLAGS = -g -std=c++17 -fpermissive -pthread -Wall -Werror -ljsoncpp
 LIB_DIR = lib/
 LIBS= 
 SRC_DIR = src/
@@ -10,7 +10,7 @@ objects:
 
 server: objects
 	@echo "** Building the server"
-	g++ -o $(BUILD_DIR)server.out server_main.o Communication.o $(CFLAGS) $(LIBS)
+	g++ -o $(BUILD_DIR)server.out server_main.o Communication.o Configuration.o $(CFLAGS) $(LIBS)
 
 client: objects
 	@echo "** Building the client"
