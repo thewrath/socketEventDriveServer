@@ -1,7 +1,5 @@
 #include "Communication.hpp"
 
-const int BUFSIZE = 4096;
-
 namespace Communication
 {
     void ISocketEventListener::onConnect(int fd) {}
@@ -24,23 +22,6 @@ namespace Communication
         this->address.sin_family = AF_INET; // on precise qu'il s'agit d'un socket reseau et non inter-processus (AF_UNIX)
 
     }
-
-    // void Socket::read(char *buffer)
-    // {
-    //     ssize_t bytes_read = 0;
-
-    //     //testing stuff, BUFSIZE = 4096
-    //     printf("Received Socket # %d\nBuffer Size = %d\n", this->description, BUFSIZE);
-
-    //     buffer[bytes_read] = 0; // Null-terminate the buffer
-    //     bytes_read = recv(this->description, buffer, BUFSIZE - 1, 0);
-    //     printf("Buffer content: %s\n", buffer);
-
-    //     std::cout << "Fin de reception" << std::endl;
-    //     if (bytes_read == -1) {
-    //         throw "Socket recv failed";
-    //     }
-    // }
 
     void Socket::write(Packet packet)
     {
