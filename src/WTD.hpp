@@ -8,7 +8,9 @@
 
 namespace  WTD
 {
-    
+    /**
+     * Est utilisé pour représenté un canard (avec les informations nécessaire)
+     */
     class Duck
     {
         public:
@@ -17,7 +19,11 @@ namespace  WTD
             float y;
             float z;
 
-            Duck(std::string, float, float, float);
+            float aX;
+            float aY;
+            float aZ;
+
+            Duck(std::string, float, float, float, float, float, float);
             Duck(const Duck&);
             std::string serialize();
     };
@@ -35,7 +41,11 @@ namespace  WTD
                 root["ducks"][i]["sound"].asString(),
                 root["ducks"][i]["position"]["x"].asFloat(),
                 root["ducks"][i]["position"]["y"].asFloat(),
-                root["ducks"][i]["position"]["z"].asFloat()
+                root["ducks"][i]["position"]["z"].asFloat(),
+                root["ducks"][i]["orientation"]["x"].asFloat(),
+                root["ducks"][i]["orientation"]["y"].asFloat(),
+                root["ducks"][i]["orientation"]["z"].asFloat()
+                
             );
             ducks.push_back(duck);
         }
