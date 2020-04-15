@@ -9,37 +9,40 @@
 namespace  WTD
 {
     
-    struct Duck
+    class Duck
     {
-        std::string sound;
-        float x;
-        float y;
-        float z;
+        public:
+            std::string sound;
+            float x;
+            float y;
+            float z;
+
+            Duck(std::string, float, float, float);
+            Duck(const Duck&);
+            std::string serialize();
     };
 
-    std::vector<WTD::Duck> ducks;
-
-    inline void LoadDucksFromJson(Json::Value root)
+    inline std::vector<Duck> LoadDucksFromJson(Json::Value root)
     {
         if(!root.isMember("ducks")){
             throw Configuration::ConfigurationReadException("Configuration file doesnt have ducks field.");
         }
+
+        std::vector<Duck> ducks;
         
         for (Json::Value::ArrayIndex i = 0; i != root["ducks"].size(); i++){
-            ducks.push_back(Duck{
+            Duck duck(
                 root["ducks"][i]["sound"].asString(),
                 root["ducks"][i]["position"]["x"].asFloat(),
                 root["ducks"][i]["position"]["y"].asFloat(),
                 root["ducks"][i]["position"]["z"].asFloat()
-            });
+            );
+            ducks.push_back(duck);
         }
-       
-    }
 
-    inline std::string SerializeDuck(Duck duck)
-    {
-        return duck.sound;
+        return ducks;
     }
+    
 };
 
 #endif
