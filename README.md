@@ -1,4 +1,4 @@
-# Client et serveur TCP avec un thread par client
+# Serveur TCP du projet What The Duck
 
 ## Compiler les programmes
 
@@ -9,10 +9,6 @@ Créez le dossier bin
 Le serveur se compile avec la commande suivante :
 
 `` make server ``
-
-Le client se compile avec la commande suivante :
-
-`` make client ``
 
 ## Tester le serveur TCP
 
