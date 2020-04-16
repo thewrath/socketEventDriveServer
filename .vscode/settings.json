@@ -50,7 +50,7 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp",
-        "cstring": "cpp",
-        "map": "cpp"
+        "hash_map": "cpp",
+        "hash_set": "cpp"
     }
 }
