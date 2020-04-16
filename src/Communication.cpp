@@ -26,7 +26,7 @@ namespace Communication
     void Socket::write(Packet packet)
     {
         std::cout << "Send response to client :" << packet.data << std::endl;
-        int n = send(this->description, packet.data.c_str(), packet.data.length(), 0);
+        int n = send(packet.description, packet.data.c_str(), packet.data.length(), 0);
         if (n < 0) {
             throw "ERROR writing to socket";
         }

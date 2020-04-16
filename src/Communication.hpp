@@ -54,7 +54,7 @@ namespace Communication
 
         public:
             Socket(unsigned int);
-            void write(Packet);
+            static void write(Packet);
 
             static void setNonBlocking(int);
             
