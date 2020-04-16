@@ -2,6 +2,11 @@ syntax = "proto2";
 
 package Base;
 
-message Connection {
-  required string nickname = 1;
+message Welcome {
+  required string uuid = 1;
+}
+
+message Hello {
+  required string uuid = 2;
+  required string nickname = 3;
 }

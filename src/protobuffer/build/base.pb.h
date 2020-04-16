@@ -38,7 +38,7 @@ namespace protobuf_base_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[1];
+  static const ::google::protobuf::internal::ParseTable schema[2];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -46,37 +46,41 @@ struct TableStruct {
 void AddDescriptors();
 }  // namespace protobuf_base_2eproto
 namespace Base {
-class Connection;
-class ConnectionDefaultTypeInternal;
-extern ConnectionDefaultTypeInternal _Connection_default_instance_;
+class Hello;
+class HelloDefaultTypeInternal;
+extern HelloDefaultTypeInternal _Hello_default_instance_;
+class Welcome;
+class WelcomeDefaultTypeInternal;
+extern WelcomeDefaultTypeInternal _Welcome_default_instance_;
 }  // namespace Base
 namespace google {
 namespace protobuf {
-template<> ::Base::Connection* Arena::CreateMaybeMessage<::Base::Connection>(Arena*);
+template<> ::Base::Hello* Arena::CreateMaybeMessage<::Base::Hello>(Arena*);
+template<> ::Base::Welcome* Arena::CreateMaybeMessage<::Base::Welcome>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace Base {
 
 // ===================================================================
 
-class Connection : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Base.Connection) */ {
+class Welcome : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Base.Welcome) */ {
  public:
-  Connection();
-  virtual ~Connection();
+  Welcome();
+  virtual ~Welcome();
 
-  Connection(const Connection& from);
+  Welcome(const Welcome& from);
 
-  inline Connection& operator=(const Connection& from) {
+  inline Welcome& operator=(const Welcome& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  Connection(Connection&& from) noexcept
-    : Connection() {
+  Welcome(Welcome&& from) noexcept
+    : Welcome() {
     *this = ::std::move(from);
   }
 
-  inline Connection& operator=(Connection&& from) noexcept {
+  inline Welcome& operator=(Welcome&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -93,34 +97,34 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Connection& default_instance();
+  static const Welcome& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Connection* internal_default_instance() {
-    return reinterpret_cast<const Connection*>(
-               &_Connection_default_instance_);
+  static inline const Welcome* internal_default_instance() {
+    return reinterpret_cast<const Welcome*>(
+               &_Welcome_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  void Swap(Connection* other);
-  friend void swap(Connection& a, Connection& b) {
+  void Swap(Welcome* other);
+  friend void swap(Welcome& a, Welcome& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Connection* New() const final {
-    return CreateMaybeMessage<Connection>(NULL);
+  inline Welcome* New() const final {
+    return CreateMaybeMessage<Welcome>(NULL);
   }
 
-  Connection* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<Connection>(arena);
+  Welcome* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Welcome>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const Connection& from);
-  void MergeFrom(const Connection& from);
+  void CopyFrom(const Welcome& from);
+  void MergeFrom(const Welcome& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -137,7 +141,7 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(Connection* other);
+  void InternalSwap(Welcome* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -153,10 +157,147 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   // accessors -------------------------------------------------------
 
-  // required string nickname = 1;
+  // required string uuid = 1;
+  bool has_uuid() const;
+  void clear_uuid();
+  static const int kUuidFieldNumber = 1;
+  const ::std::string& uuid() const;
+  void set_uuid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_uuid(::std::string&& value);
+  #endif
+  void set_uuid(const char* value);
+  void set_uuid(const char* value, size_t size);
+  ::std::string* mutable_uuid();
+  ::std::string* release_uuid();
+  void set_allocated_uuid(::std::string* uuid);
+
+  // @@protoc_insertion_point(class_scope:Base.Welcome)
+ private:
+  void set_has_uuid();
+  void clear_has_uuid();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr uuid_;
+  friend struct ::protobuf_base_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Hello : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Base.Hello) */ {
+ public:
+  Hello();
+  virtual ~Hello();
+
+  Hello(const Hello& from);
+
+  inline Hello& operator=(const Hello& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Hello(Hello&& from) noexcept
+    : Hello() {
+    *this = ::std::move(from);
+  }
+
+  inline Hello& operator=(Hello&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Hello& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Hello* internal_default_instance() {
+    return reinterpret_cast<const Hello*>(
+               &_Hello_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  void Swap(Hello* other);
+  friend void swap(Hello& a, Hello& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Hello* New() const final {
+    return CreateMaybeMessage<Hello>(NULL);
+  }
+
+  Hello* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Hello>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const Hello& from);
+  void MergeFrom(const Hello& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Hello* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string uuid = 2;
+  bool has_uuid() const;
+  void clear_uuid();
+  static const int kUuidFieldNumber = 2;
+  const ::std::string& uuid() const;
+  void set_uuid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_uuid(::std::string&& value);
+  #endif
+  void set_uuid(const char* value);
+  void set_uuid(const char* value, size_t size);
+  ::std::string* mutable_uuid();
+  ::std::string* release_uuid();
+  void set_allocated_uuid(::std::string* uuid);
+
+  // required string nickname = 3;
   bool has_nickname() const;
   void clear_nickname();
-  static const int kNicknameFieldNumber = 1;
+  static const int kNicknameFieldNumber = 3;
   const ::std::string& nickname() const;
   void set_nickname(const ::std::string& value);
   #if LANG_CXX11
@@ -168,14 +309,20 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::std::string* release_nickname();
   void set_allocated_nickname(::std::string* nickname);
 
-  // @@protoc_insertion_point(class_scope:Base.Connection)
+  // @@protoc_insertion_point(class_scope:Base.Hello)
  private:
+  void set_has_uuid();
+  void clear_has_uuid();
   void set_has_nickname();
   void clear_has_nickname();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr uuid_;
   ::google::protobuf::internal::ArenaStringPtr nickname_;
   friend struct ::protobuf_base_2eproto::TableStruct;
 };
@@ -188,77 +335,215 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// Connection
+// Welcome
 
-// required string nickname = 1;
-inline bool Connection::has_nickname() const {
+// required string uuid = 1;
+inline bool Welcome::has_uuid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Connection::set_has_nickname() {
+inline void Welcome::set_has_uuid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Connection::clear_has_nickname() {
+inline void Welcome::clear_has_uuid() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Connection::clear_nickname() {
+inline void Welcome::clear_uuid() {
+  uuid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_uuid();
+}
+inline const ::std::string& Welcome::uuid() const {
+  // @@protoc_insertion_point(field_get:Base.Welcome.uuid)
+  return uuid_.GetNoArena();
+}
+inline void Welcome::set_uuid(const ::std::string& value) {
+  set_has_uuid();
+  uuid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Base.Welcome.uuid)
+}
+#if LANG_CXX11
+inline void Welcome::set_uuid(::std::string&& value) {
+  set_has_uuid();
+  uuid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Base.Welcome.uuid)
+}
+#endif
+inline void Welcome::set_uuid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_uuid();
+  uuid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Base.Welcome.uuid)
+}
+inline void Welcome::set_uuid(const char* value, size_t size) {
+  set_has_uuid();
+  uuid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Base.Welcome.uuid)
+}
+inline ::std::string* Welcome::mutable_uuid() {
+  set_has_uuid();
+  // @@protoc_insertion_point(field_mutable:Base.Welcome.uuid)
+  return uuid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Welcome::release_uuid() {
+  // @@protoc_insertion_point(field_release:Base.Welcome.uuid)
+  if (!has_uuid()) {
+    return NULL;
+  }
+  clear_has_uuid();
+  return uuid_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Welcome::set_allocated_uuid(::std::string* uuid) {
+  if (uuid != NULL) {
+    set_has_uuid();
+  } else {
+    clear_has_uuid();
+  }
+  uuid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uuid);
+  // @@protoc_insertion_point(field_set_allocated:Base.Welcome.uuid)
+}
+
+// -------------------------------------------------------------------
+
+// Hello
+
+// required string uuid = 2;
+inline bool Hello::has_uuid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Hello::set_has_uuid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Hello::clear_has_uuid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Hello::clear_uuid() {
+  uuid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_uuid();
+}
+inline const ::std::string& Hello::uuid() const {
+  // @@protoc_insertion_point(field_get:Base.Hello.uuid)
+  return uuid_.GetNoArena();
+}
+inline void Hello::set_uuid(const ::std::string& value) {
+  set_has_uuid();
+  uuid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Base.Hello.uuid)
+}
+#if LANG_CXX11
+inline void Hello::set_uuid(::std::string&& value) {
+  set_has_uuid();
+  uuid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Base.Hello.uuid)
+}
+#endif
+inline void Hello::set_uuid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_uuid();
+  uuid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Base.Hello.uuid)
+}
+inline void Hello::set_uuid(const char* value, size_t size) {
+  set_has_uuid();
+  uuid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Base.Hello.uuid)
+}
+inline ::std::string* Hello::mutable_uuid() {
+  set_has_uuid();
+  // @@protoc_insertion_point(field_mutable:Base.Hello.uuid)
+  return uuid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Hello::release_uuid() {
+  // @@protoc_insertion_point(field_release:Base.Hello.uuid)
+  if (!has_uuid()) {
+    return NULL;
+  }
+  clear_has_uuid();
+  return uuid_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Hello::set_allocated_uuid(::std::string* uuid) {
+  if (uuid != NULL) {
+    set_has_uuid();
+  } else {
+    clear_has_uuid();
+  }
+  uuid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uuid);
+  // @@protoc_insertion_point(field_set_allocated:Base.Hello.uuid)
+}
+
+// required string nickname = 3;
+inline bool Hello::has_nickname() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Hello::set_has_nickname() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Hello::clear_has_nickname() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Hello::clear_nickname() {
   nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_nickname();
 }
-inline const ::std::string& Connection::nickname() const {
-  // @@protoc_insertion_point(field_get:Base.Connection.nickname)
+inline const ::std::string& Hello::nickname() const {
+  // @@protoc_insertion_point(field_get:Base.Hello.nickname)
   return nickname_.GetNoArena();
 }
-inline void Connection::set_nickname(const ::std::string& value) {
+inline void Hello::set_nickname(const ::std::string& value) {
   set_has_nickname();
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Base.Connection.nickname)
+  // @@protoc_insertion_point(field_set:Base.Hello.nickname)
 }
 #if LANG_CXX11
-inline void Connection::set_nickname(::std::string&& value) {
+inline void Hello::set_nickname(::std::string&& value) {
   set_has_nickname();
   nickname_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Base.Connection.nickname)
+  // @@protoc_insertion_point(field_set_rvalue:Base.Hello.nickname)
 }
 #endif
-inline void Connection::set_nickname(const char* value) {
+inline void Hello::set_nickname(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   set_has_nickname();
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Base.Connection.nickname)
+  // @@protoc_insertion_point(field_set_char:Base.Hello.nickname)
 }
-inline void Connection::set_nickname(const char* value, size_t size) {
+inline void Hello::set_nickname(const char* value, size_t size) {
   set_has_nickname();
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Base.Connection.nickname)
+  // @@protoc_insertion_point(field_set_pointer:Base.Hello.nickname)
 }
-inline ::std::string* Connection::mutable_nickname() {
+inline ::std::string* Hello::mutable_nickname() {
   set_has_nickname();
-  // @@protoc_insertion_point(field_mutable:Base.Connection.nickname)
+  // @@protoc_insertion_point(field_mutable:Base.Hello.nickname)
   return nickname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Connection::release_nickname() {
-  // @@protoc_insertion_point(field_release:Base.Connection.nickname)
+inline ::std::string* Hello::release_nickname() {
+  // @@protoc_insertion_point(field_release:Base.Hello.nickname)
   if (!has_nickname()) {
     return NULL;
   }
   clear_has_nickname();
   return nickname_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Connection::set_allocated_nickname(::std::string* nickname) {
+inline void Hello::set_allocated_nickname(::std::string* nickname) {
   if (nickname != NULL) {
     set_has_nickname();
   } else {
     clear_has_nickname();
   }
   nickname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), nickname);
-  // @@protoc_insertion_point(field_set_allocated:Base.Connection.nickname)
+  // @@protoc_insertion_point(field_set_allocated:Base.Hello.nickname)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

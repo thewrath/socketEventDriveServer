@@ -9,12 +9,10 @@ void PacketProcessing(Communication::Packet packet)
     std::cout << packet.data << std::endl;
 
     // Send protobuffer message test
-    Base::Connection connection;
-    connection.set_nickname("Thomas");
+    Base::Welcome welcome;
+    welcome.set_uuid("uuid here");
 
-    std::string responseData;
-    connection.SerializeToString(&responseData);
-    Communication::Packet response{packet.description, responseData};
+    Communication::Packet response{packet.description, welcome.SerializeAsString()};
 
     Communication::Socket::write(response);
 }
