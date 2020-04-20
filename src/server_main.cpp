@@ -1,8 +1,8 @@
 #include "Configuration.hpp"
 #include "Communication.hpp"
-#include "protobuffer/build/base.pb.h"
+#include "Message.hpp"
 
-std::vector<Base::Duck> ducks;
+std::vector<Message::Duck> ducks;
 
 // Businness code for WTD packet processing
 void WTDPacketProcessing(Communication::Packet packet)
@@ -12,60 +12,56 @@ void WTDPacketProcessing(Communication::Packet packet)
     std::cout << packet.data << std::endl;
 
     // Send protobuffer message test
-    Base::Welcome welcome;
-    welcome.set_uuid("uuid here");
-
-    Communication::Packet response{packet.description, welcome.SerializeAsString()};
-
-    Communication::Socket::write(response);
+    for(auto& duck : ducks){
+        Communication::Packet response{packet.description, duck.SerializeToString()};
+        std::cout << duck.DebugString() << std::endl;
+        try {
+            Communication::Socket::write(response);
+        } catch(Communication::SocketException& e) {
+            std::cout << "Client disconnected during socket writing" << std::endl;
+            break;
+        }
+    }
 }
 // function to load duck messages from json configuration
-std::vector<Base::Duck> LoadDucksFromJson(Json::Value root)
-    {
-        if(!root.isMember("ducks")){
-            throw Configuration::ConfigurationReadException("Configuration file doesnt have ducks field.");
-        }
-
-        std::vector<Duck> ducks;
-        
-        for (Json::Value::ArrayIndex i = 0; i != root["ducks"].size(); i++){
-            Duck duck(
-                root["ducks"][i]["sound"].asString(),
-                root["ducks"][i]["position"]["x"].asFloat(),
-                root["ducks"][i]["position"]["y"].asFloat(),
-                root["ducks"][i]["position"]["z"].asFloat(),
-                root["ducks"][i]["orientation"]["x"].asFloat(),
-                root["ducks"][i]["orientation"]["y"].asFloat(),
-                root["ducks"][i]["orientation"]["z"].asFloat()
-                
-            );
-            ducks.push_back(duck);
-        }
-
-        return ducks;
+std::vector<Message::Duck> LoadDucksFromJson(Json::Value root)
+{
+    if(!root.isMember("ducks")){
+        throw Configuration::ConfigurationReadException("Configuration file doesnt have ducks field.");
     }
+
+    std::vector<Message::Duck> ducks;
+    
+    for (Json::Value::ArrayIndex i = 0; i != root["ducks"].size(); i++){
+        Message::Duck duck;
+        duck.set_sound(root["ducks"][i]["sound"].asString());
+        duck.set_x(root["ducks"][i]["position"]["x"].asFloat());
+        duck.set_y(root["ducks"][i]["position"]["y"].asFloat());
+        duck.set_z(root["ducks"][i]["position"]["z"].asFloat());
+        duck.set_ax(root["ducks"][i]["orientation"]["x"].asFloat());
+        duck.set_ay(root["ducks"][i]["orientation"]["y"].asFloat());
+        duck.set_az(root["ducks"][i]["orientation"]["z"].asFloat());
+        ducks.push_back(duck);
+    }
+
+    return ducks;
+}
 
 // Program entry, start the server and catch exception from it
 int main(int argc, char* argv[])
 {
-    // Verify that the version of the library that we linked against is
-    // compatible with the version of the headers we compiled against.
-    GOOGLE_PROTOBUF_VERIFY_VERSION;
-    try{
       
-        // Load configuration file
+    // Load configuration file
+    if(argv[1]) {
         Configuration::JsonLoader jsonLoader(argv[1]);
-
         // Get all ducks from configurations file 
-        ducks = WTD::LoadDucksFromJson(jsonLoader.getValue());
+        ducks = LoadDucksFromJson(jsonLoader.getValue());
 
         // Start server 
         Communication::Server server(3333, std::thread::hardware_concurrency(), (Communication::processPacket) WTDPacketProcessing);
-    } catch(Communication::SocketException& exception) {
-        std::cout << exception.message << std::endl;
-    } catch(Configuration::ConfigurationReadException& exception) {
-        std::cout << exception.message << std::endl;
+    } else {
+        std::cerr << "Cannot start server without configuration file" << std::endl;
+        return 1;
     }
-    google::protobuf::ShutdownProtobufLibrary();
     return 0;
 }
