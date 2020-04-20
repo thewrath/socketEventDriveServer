@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message',['message',['../struct_communication_1_1_socket_exception.html#aaeb040768e61a31a9e00e645d2a060b7',1,'Communication::SocketException::message()'],['../struct_configuration_1_1_configuration_read_exception.html#a8d84274c6d8af7f7e03460828e9d53ca',1,'Configuration::ConfigurationReadException::message()']]]
+  ['type',['type',['../class_message_1_1_base.html#a45d3dc26d321f26865ca12fd5b5ebc8a',1,'Message::Base']]]
 ];

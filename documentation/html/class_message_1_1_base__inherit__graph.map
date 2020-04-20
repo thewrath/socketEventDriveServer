@@ -1,0 +1,6 @@
+<map id="Message::Base" name="Message::Base">
+<area shape="rect" id="node1" title=" " alt="" coords="219,5,339,32"/>
+<area shape="rect" id="node2" href="$class_message_1_1_connection.html" title=" " alt="" coords="5,80,167,107"/>
+<area shape="rect" id="node3" href="$class_message_1_1_deconnection.html" title=" " alt="" coords="191,80,368,107"/>
+<area shape="rect" id="node4" href="$class_message_1_1_duck.html" title=" " alt="" coords="392,80,513,107"/>
+</map>

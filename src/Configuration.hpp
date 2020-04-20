@@ -1,11 +1,22 @@
+/**
+ * \file Configuration.hpp
+ * \brief Package de configuration
+ * \author thewrath
+ * \version 1.0
+ * \date 20/04/2020
+ *
+ * Package utile à la lecture de fichier de configuration.
+ *
+ */
+
 #ifndef CONFIGURATION_HPP
 #define CONFIGURATION_HPP
+
+#include "json/json.h"
 
 #include <fstream>
 #include <iostream>
 #include <string.h>
-
-#include "json/json.h"
 
 namespace Configuration 
 {

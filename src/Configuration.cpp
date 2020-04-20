@@ -13,9 +13,6 @@ namespace Configuration
         if (!parseFromStream(builder, ifs, &this->root, &errs)) {
             throw ConfigurationReadException("Error when parsing configuration file, is your file correctly structured ?");
         }
-
-        std::cout << "Current configuration file :" << std::endl;
-        std::cout << this->root << std::endl;
     }
 
     Json::Value JsonLoader::getValue()

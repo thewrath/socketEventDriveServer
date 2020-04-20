@@ -1,6 +1,10 @@
 var hierarchy =
 [
-    [ "WTD::Duck", "class_w_t_d_1_1_duck.html", null ],
+    [ "Message::Base", "class_message_1_1_base.html", [
+      [ "Message::Connection", "class_message_1_1_connection.html", null ],
+      [ "Message::Deconnection", "class_message_1_1_deconnection.html", null ],
+      [ "Message::Duck", "class_message_1_1_duck.html", null ]
+    ] ],
     [ "exception", null, [
       [ "Communication::SocketException", "struct_communication_1_1_socket_exception.html", null ],
       [ "Configuration::ConfigurationReadException", "struct_configuration_1_1_configuration_read_exception.html", null ]

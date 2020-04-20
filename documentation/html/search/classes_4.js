@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['packet',['Packet',['../struct_communication_1_1_packet.html',1,'Communication']]]
+  ['jsonloader',['JsonLoader',['../class_configuration_1_1_json_loader.html',1,'Configuration']]]
 ];

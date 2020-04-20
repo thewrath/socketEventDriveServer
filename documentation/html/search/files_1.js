@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['server_5fmain_2ecpp',['server_main.cpp',['../server__main_8cpp.html',1,'']]]
+  ['main_2ecpp',['main.cpp',['../main_8cpp.html',1,'']]],
+  ['message_2ecpp',['Message.cpp',['../_message_8cpp.html',1,'']]],
+  ['message_2ehpp',['Message.hpp',['../_message_8hpp.html',1,'']]]
 ];

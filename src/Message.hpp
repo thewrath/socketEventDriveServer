@@ -1,3 +1,14 @@
+/**
+ * \file Message.hpp
+ * \brief Package contenant les différents messages
+ * \author thewrath
+ * \version 1.0
+ * \date 20/04/2020
+ *
+ * Package contenant les différents messages et les méthodes de sérializations.
+ *
+ */
+
 #ifndef MESSAGE_HPP
 #define MESSAGE_HPP
 

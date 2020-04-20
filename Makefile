@@ -8,13 +8,16 @@ FIND_RECUR = $(shell find src -type f -name "*.cpp")
 objects:  
 	g++ -c $(SRC_DIR)*.cpp $(FIND_RECUR) $(CFLAGS)
 
-server: objects
+build: objects
 	@echo "** Building the server"
 	g++ -o $(BUILD_DIR)server.out *.o $(CFLAGS) $(LIBS)
 
-run_server:
+run: build
 	@echo "Start server"
-	./bin/server.out
+	./bin/server.out ./bin/configuration.json
+
+doc: 
+	doxygen Doxyfile && firefox documentation/html/index.html
 	
 clean:
 	@echo "** Removing object files ..."

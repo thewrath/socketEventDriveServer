@@ -110,13 +110,16 @@ Inheritance diagram for Communication::Socket:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:affb762c54586e8ab4f9d2024e57dbae0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_socket.html#affb762c54586e8ab4f9d2024e57dbae0">Socket</a> (unsigned int)</td></tr>
+<tr class="memdesc:affb762c54586e8ab4f9d2024e57dbae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_communication_1_1_socket.html">Socket</a>:: <a class="el" href="class_communication_1_1_socket.html">Socket</a> object.  <a href="#affb762c54586e8ab4f9d2024e57dbae0">More...</a><br /></td></tr>
 <tr class="separator:affb762c54586e8ab4f9d2024e57dbae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a2b7237a084aa6417207592ce2e045a83"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_socket.html#a2b7237a084aa6417207592ce2e045a83">write</a> (<a class="el" href="struct_communication_1_1_packet.html">Packet</a>)</td></tr>
+<tr class="memdesc:a2b7237a084aa6417207592ce2e045a83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Procedure to write on socket designed by description attribut in packet.  <a href="#a2b7237a084aa6417207592ce2e045a83">More...</a><br /></td></tr>
 <tr class="separator:a2b7237a084aa6417207592ce2e045a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79259c6bb4eadefcd9c0420a52c7c900"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_socket.html#a79259c6bb4eadefcd9c0420a52c7c900">setNonBlocking</a> (int)</td></tr>
+<tr class="memdesc:a79259c6bb4eadefcd9c0420a52c7c900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Procedure to set socket designed by fg argument in non-blocking mode.  <a href="#a79259c6bb4eadefcd9c0420a52c7c900">More...</a><br /></td></tr>
 <tr class="separator:a79259c6bb4eadefcd9c0420a52c7c900"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -128,7 +131,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00049">49</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00062">62</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="affb762c54586e8ab4f9d2024e57dbae0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#affb762c54586e8ab4f9d2024e57dbae0">&#9670;&nbsp;</a></span>Socket()</h2>
@@ -146,7 +149,15 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00013">13</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Construct a new <a class="el" href="class_communication_1_1_socket.html">Socket</a>:: <a class="el" href="class_communication_1_1_socket.html">Socket</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>the socket port </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00020">20</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>
@@ -175,14 +186,22 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00054">54</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Procedure to set socket designed by fg argument in non-blocking mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00052">52</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_socket_a79259c6bb4eadefcd9c0420a52c7c900_icgraph.png" border="0" usemap="#class_communication_1_1_socket_a79259c6bb4eadefcd9c0420a52c7c900_icgraph" alt=""/></div>
 <map name="class_communication_1_1_socket_a79259c6bb4eadefcd9c0420a52c7c900_icgraph" id="class_communication_1_1_socket_a79259c6bb4eadefcd9c0420a52c7c900_icgraph">
-<area shape="rect"  title=" " alt="" coords="272,5,448,47"/>
-<area shape="rect"  href="class_communication_1_1_server_socket.html#a49a7d9dbce481ec5b2c783c92c00975d" title=" " alt="" coords="5,5,224,47"/>
+<area shape="rect"  title="Procedure to set socket designed by fg argument in non&#45;blocking mode." alt="" coords="272,5,448,47"/>
+<area shape="rect"  href="class_communication_1_1_server_socket.html#a49a7d9dbce481ec5b2c783c92c00975d" title="Construct a new Server Socket:: Server Socket object." alt="" coords="5,5,224,47"/>
 </map>
 </div>
 
@@ -212,15 +231,23 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00045">45</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Procedure to write on socket designed by description attribut in packet. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packet</td><td>the packet to write on the TCP connection </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00039">39</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_socket_a2b7237a084aa6417207592ce2e045a83_icgraph.png" border="0" usemap="#class_communication_1_1_socket_a2b7237a084aa6417207592ce2e045a83_icgraph" alt=""/></div>
 <map name="class_communication_1_1_socket_a2b7237a084aa6417207592ce2e045a83_icgraph" id="class_communication_1_1_socket_a2b7237a084aa6417207592ce2e045a83_icgraph">
-<area shape="rect"  title=" " alt="" coords="321,5,497,47"/>
-<area shape="rect"  href="server__main_8cpp.html#af7382bb51399ec2bbbe04a7e6aebf366" title=" " alt="" coords="108,13,273,39"/>
-<area shape="rect"  href="server__main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect"  title="Procedure to write on socket designed by description attribut in packet." alt="" coords="321,5,497,47"/>
+<area shape="rect"  href="main_8cpp.html#af7382bb51399ec2bbbe04a7e6aebf366" title=" " alt="" coords="108,13,273,39"/>
+<area shape="rect"  href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,60,39"/>
 </map>
 </div>
 
@@ -247,7 +274,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00053">53</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00066">66</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
 
 </div>
 </div>
@@ -271,7 +298,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00052">52</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00065">65</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
 
 </div>
 </div>

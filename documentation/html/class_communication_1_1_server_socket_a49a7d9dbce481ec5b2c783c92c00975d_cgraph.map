@@ -1,4 +1,4 @@
 <map id="Communication::ServerSocket::ServerSocket" name="Communication::ServerSocket::ServerSocket">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,224,47"/>
-<area shape="rect" id="node2" href="$class_communication_1_1_socket.html#a79259c6bb4eadefcd9c0420a52c7c900" title=" " alt="" coords="272,5,448,47"/>
+<area shape="rect" id="node1" title="Construct a new Server Socket:: Server Socket object." alt="" coords="5,5,224,47"/>
+<area shape="rect" id="node2" href="$class_communication_1_1_socket.html#a79259c6bb4eadefcd9c0420a52c7c900" title="Procedure to set socket designed by fg argument in non&#45;blocking mode." alt="" coords="272,5,448,47"/>
 </map>

@@ -99,22 +99,27 @@ $(document).ready(function(){initNavTree('class_communication_1_1_thread_pool.ht
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4c6d99adb5362350ff3fc9ff8fcb43f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_thread_pool.html#a4c6d99adb5362350ff3fc9ff8fcb43f2">ThreadPool</a> (int, <a class="el" href="namespace_communication.html#a78cdc9d805be0599044e39f638b5d88b">processPacket</a>)</td></tr>
+<tr class="memdesc:a4c6d99adb5362350ff3fc9ff8fcb43f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Thread Pool:: Thread Pool object.  <a href="#a4c6d99adb5362350ff3fc9ff8fcb43f2">More...</a><br /></td></tr>
 <tr class="separator:a4c6d99adb5362350ff3fc9ff8fcb43f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad503e248e452230cb3a41360f46551cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_thread_pool.html#ad503e248e452230cb3a41360f46551cb">~ThreadPool</a> ()</td></tr>
+<tr class="memdesc:ad503e248e452230cb3a41360f46551cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the Thread Pool:: Thread Pool object.  <a href="#ad503e248e452230cb3a41360f46551cb">More...</a><br /></td></tr>
 <tr class="separator:ad503e248e452230cb3a41360f46551cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27cee5163757473a4a3c32a70fa9b3ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_thread_pool.html#a27cee5163757473a4a3c32a70fa9b3ef">addPacket</a> (<a class="el" href="struct_communication_1_1_packet.html">Packet</a>)</td></tr>
+<tr class="memdesc:a27cee5163757473a4a3c32a70fa9b3ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add packet to be process by the thread poll.  <a href="#a27cee5163757473a4a3c32a70fa9b3ef">More...</a><br /></td></tr>
 <tr class="separator:a27cee5163757473a4a3c32a70fa9b3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43da2eca22dcd4d60bcafdd448c61d00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_thread_pool.html#a43da2eca22dcd4d60bcafdd448c61d00">shutdown</a> ()</td></tr>
+<tr class="memdesc:a43da2eca22dcd4d60bcafdd448c61d00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shutdown thread poll (join all thread)  <a href="#a43da2eca22dcd4d60bcafdd448c61d00">More...</a><br /></td></tr>
 <tr class="separator:a43da2eca22dcd4d60bcafdd448c61d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a855f6f4457a11d1a01e36e9dca989f32"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_thread_pool.html#a855f6f4457a11d1a01e36e9dca989f32">threadWork</a> (int, bool *, std::condition_variable *, std::mutex *, std::queue&lt; <a class="el" href="struct_communication_1_1_packet.html">Packet</a> &gt; *, <a class="el" href="namespace_communication.html#a78cdc9d805be0599044e39f638b5d88b">processPacket</a>)</td></tr>
+<tr class="memdesc:a855f6f4457a11d1a01e36e9dca989f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread job (take packet in the packets queue and process it)  <a href="#a855f6f4457a11d1a01e36e9dca989f32">More...</a><br /></td></tr>
 <tr class="separator:a855f6f4457a11d1a01e36e9dca989f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00096">96</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00113">113</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4c6d99adb5362350ff3fc9ff8fcb43f2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4c6d99adb5362350ff3fc9ff8fcb43f2">&#9670;&nbsp;</a></span>ThreadPool()</h2>
@@ -142,14 +147,23 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00243">243</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Construct a new Thread Pool:: Thread Pool object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">number_of_thread</td><td>Number of thread to be used by the pool </td></tr>
+    <tr><td class="paramname">process</td><td>how a packet is process </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00305">305</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_thread_pool_a4c6d99adb5362350ff3fc9ff8fcb43f2_cgraph.png" border="0" usemap="#class_communication_1_1_thread_pool_a4c6d99adb5362350ff3fc9ff8fcb43f2_cgraph" alt=""/></div>
 <map name="class_communication_1_1_thread_pool_a4c6d99adb5362350ff3fc9ff8fcb43f2_cgraph" id="class_communication_1_1_thread_pool_a4c6d99adb5362350ff3fc9ff8fcb43f2_cgraph">
-<area shape="rect"  title=" " alt="" coords="5,5,212,47"/>
-<area shape="rect"  href="class_communication_1_1_thread_pool.html#a855f6f4457a11d1a01e36e9dca989f32" title=" " alt="" coords="260,5,467,47"/>
+<area shape="rect"  title="Construct a new Thread Pool:: Thread Pool object." alt="" coords="5,5,212,47"/>
+<area shape="rect"  href="class_communication_1_1_thread_pool.html#a855f6f4457a11d1a01e36e9dca989f32" title="Thread job (take packet in the packets queue and process it)" alt="" coords="260,5,467,47"/>
 </map>
 </div>
 
@@ -170,14 +184,16 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00254">254</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Destroy the Thread Pool:: Thread Pool object. </p>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00317">317</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_thread_pool_ad503e248e452230cb3a41360f46551cb_cgraph.png" border="0" usemap="#class_communication_1_1_thread_pool_ad503e248e452230cb3a41360f46551cb_cgraph" alt=""/></div>
 <map name="class_communication_1_1_thread_pool_ad503e248e452230cb3a41360f46551cb_cgraph" id="class_communication_1_1_thread_pool_ad503e248e452230cb3a41360f46551cb_cgraph">
-<area shape="rect"  title=" " alt="" coords="5,5,212,47"/>
-<area shape="rect"  href="class_communication_1_1_thread_pool.html#a43da2eca22dcd4d60bcafdd448c61d00" title=" " alt="" coords="260,5,467,47"/>
+<area shape="rect"  title="Destroy the Thread Pool:: Thread Pool object." alt="" coords="5,5,212,47"/>
+<area shape="rect"  href="class_communication_1_1_thread_pool.html#a43da2eca22dcd4d60bcafdd448c61d00" title="Shutdown thread poll (join all thread)" alt="" coords="260,5,467,47"/>
 </map>
 </div>
 
@@ -200,14 +216,22 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00261">261</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Add packet to be process by the thread poll. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packet</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00329">329</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_thread_pool_a27cee5163757473a4a3c32a70fa9b3ef_icgraph.png" border="0" usemap="#class_communication_1_1_thread_pool_a27cee5163757473a4a3c32a70fa9b3ef_icgraph" alt=""/></div>
 <map name="class_communication_1_1_thread_pool_a27cee5163757473a4a3c32a70fa9b3ef_icgraph" id="class_communication_1_1_thread_pool_a27cee5163757473a4a3c32a70fa9b3ef_icgraph">
-<area shape="rect"  title=" " alt="" coords="228,5,435,47"/>
-<area shape="rect"  href="class_communication_1_1_server.html#a1d4ae5637b756920d350d5e86a06ea13" title=" " alt="" coords="5,5,180,47"/>
+<area shape="rect"  title="Add packet to be process by the thread poll." alt="" coords="228,5,435,47"/>
+<area shape="rect"  href="class_communication_1_1_server.html#a1d4ae5637b756920d350d5e86a06ea13" title="Call on every data received event." alt="" coords="5,5,180,47"/>
 </map>
 </div>
 
@@ -228,14 +252,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00270">270</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Shutdown thread poll (join all thread) </p>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00342">342</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_thread_pool_a43da2eca22dcd4d60bcafdd448c61d00_icgraph.png" border="0" usemap="#class_communication_1_1_thread_pool_a43da2eca22dcd4d60bcafdd448c61d00_icgraph" alt=""/></div>
 <map name="class_communication_1_1_thread_pool_a43da2eca22dcd4d60bcafdd448c61d00_icgraph" id="class_communication_1_1_thread_pool_a43da2eca22dcd4d60bcafdd448c61d00_icgraph">
-<area shape="rect"  title=" " alt="" coords="260,5,467,47"/>
-<area shape="rect"  href="class_communication_1_1_thread_pool.html#ad503e248e452230cb3a41360f46551cb" title=" " alt="" coords="5,5,212,47"/>
+<area shape="rect"  title="Shutdown thread poll (join all thread)" alt="" coords="260,5,467,47"/>
+<area shape="rect"  href="class_communication_1_1_thread_pool.html#ad503e248e452230cb3a41360f46551cb" title="Destroy the Thread Pool:: Thread Pool object." alt="" coords="5,5,212,47"/>
 </map>
 </div>
 
@@ -299,14 +325,27 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00289">289</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Thread job (take packet in the packets queue and process it) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threadID</td><td></td></tr>
+    <tr><td class="paramname">terminate_pool</td><td></td></tr>
+    <tr><td class="paramname">condition</td><td></td></tr>
+    <tr><td class="paramname">queueMutex</td><td></td></tr>
+    <tr><td class="paramname">packets</td><td></td></tr>
+    <tr><td class="paramname">process</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00370">370</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_thread_pool_a855f6f4457a11d1a01e36e9dca989f32_icgraph.png" border="0" usemap="#class_communication_1_1_thread_pool_a855f6f4457a11d1a01e36e9dca989f32_icgraph" alt=""/></div>
 <map name="class_communication_1_1_thread_pool_a855f6f4457a11d1a01e36e9dca989f32_icgraph" id="class_communication_1_1_thread_pool_a855f6f4457a11d1a01e36e9dca989f32_icgraph">
-<area shape="rect"  title=" " alt="" coords="260,5,467,47"/>
-<area shape="rect"  href="class_communication_1_1_thread_pool.html#a4c6d99adb5362350ff3fc9ff8fcb43f2" title=" " alt="" coords="5,5,212,47"/>
+<area shape="rect"  title="Thread job (take packet in the packets queue and process it)" alt="" coords="260,5,467,47"/>
+<area shape="rect"  href="class_communication_1_1_thread_pool.html#a4c6d99adb5362350ff3fc9ff8fcb43f2" title="Construct a new Thread Pool:: Thread Pool object." alt="" coords="5,5,212,47"/>
 </map>
 </div>
 

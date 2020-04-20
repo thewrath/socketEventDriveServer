@@ -1,4 +1,4 @@
 <map id="Communication::ThreadPool::shutdown" name="Communication::ThreadPool::shutdown">
-<area shape="rect" id="node1" title=" " alt="" coords="260,5,467,47"/>
-<area shape="rect" id="node2" href="$class_communication_1_1_thread_pool.html#ad503e248e452230cb3a41360f46551cb" title=" " alt="" coords="5,5,212,47"/>
+<area shape="rect" id="node1" title="Shutdown thread poll (join all thread)" alt="" coords="260,5,467,47"/>
+<area shape="rect" id="node2" href="$class_communication_1_1_thread_pool.html#ad503e248e452230cb3a41360f46551cb" title="Destroy the Thread Pool:: Thread Pool object." alt="" coords="5,5,212,47"/>
 </map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bufsize',['BUFSIZE',['../_communication_8cpp.html#ad69f678058ac1e2c6d82212fd735b7a4',1,'Communication.cpp']]]
+  ['base',['Base',['../class_message_1_1_base.html',1,'Message::Base'],['../namespace_message.html#af4370c64206db0d5b0a3b7f8d3bbfc31a80839062b39f7d8207d64b3ff2e37962',1,'Message::base()']]]
 ];

@@ -116,21 +116,27 @@ Collaboration diagram for Communication::Server:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a275c9cc185fd6cbce86dc58834c4055d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_server.html#a275c9cc185fd6cbce86dc58834c4055d">Server</a> (unsigned int, int, <a class="el" href="namespace_communication.html#a78cdc9d805be0599044e39f638b5d88b">processPacket</a>)</td></tr>
+<tr class="memdesc:a275c9cc185fd6cbce86dc58834c4055d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_communication_1_1_server.html">Server</a>:: <a class="el" href="class_communication_1_1_server.html">Server</a> object.  <a href="#a275c9cc185fd6cbce86dc58834c4055d">More...</a><br /></td></tr>
 <tr class="separator:a275c9cc185fd6cbce86dc58834c4055d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cdc9e560e21cca494e30024cade2b87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_server.html#a4cdc9e560e21cca494e30024cade2b87">onConnect</a> (int fd) override</td></tr>
+<tr class="memdesc:a4cdc9e560e21cca494e30024cade2b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call on every client connected event.  <a href="#a4cdc9e560e21cca494e30024cade2b87">More...</a><br /></td></tr>
 <tr class="separator:a4cdc9e560e21cca494e30024cade2b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a737cdf03ba452a9f91b0965449f1810f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_server.html#a737cdf03ba452a9f91b0965449f1810f">onDisconnect</a> (int fd) override</td></tr>
+<tr class="memdesc:a737cdf03ba452a9f91b0965449f1810f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call on every client disconnected event.  <a href="#a737cdf03ba452a9f91b0965449f1810f">More...</a><br /></td></tr>
 <tr class="separator:a737cdf03ba452a9f91b0965449f1810f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a883d1d8ca0db5c88545fb913b5f222"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_server.html#a8a883d1d8ca0db5c88545fb913b5f222">onDataSend</a> (int fd, const std::vector&lt; char &gt; &amp;data) override</td></tr>
+<tr class="memdesc:a8a883d1d8ca0db5c88545fb913b5f222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call on every data sent event.  <a href="#a8a883d1d8ca0db5c88545fb913b5f222">More...</a><br /></td></tr>
 <tr class="separator:a8a883d1d8ca0db5c88545fb913b5f222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d4ae5637b756920d350d5e86a06ea13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_server.html#a1d4ae5637b756920d350d5e86a06ea13">onDataReceive</a> (int fd, const std::vector&lt; char &gt; &amp;data) override</td></tr>
+<tr class="memdesc:a1d4ae5637b756920d350d5e86a06ea13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call on every data received event.  <a href="#a1d4ae5637b756920d350d5e86a06ea13">More...</a><br /></td></tr>
 <tr class="separator:a1d4ae5637b756920d350d5e86a06ea13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a5f5c4eecfd439aa7b4a3cc83f338bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_communication_1_1_server.html#a3a5f5c4eecfd439aa7b4a3cc83f338bc">onSocketException</a> (<a class="el" href="struct_communication_1_1_socket_exception.html">SocketException</a> exception) override</td></tr>
+<tr class="memdesc:a3a5f5c4eecfd439aa7b4a3cc83f338bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call on every exception event.  <a href="#a3a5f5c4eecfd439aa7b4a3cc83f338bc">More...</a><br /></td></tr>
 <tr class="separator:a3a5f5c4eecfd439aa7b4a3cc83f338bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00115">115</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8hpp_source.html#l00132">132</a> of file <a class="el" href="_communication_8hpp_source.html">Communication.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a275c9cc185fd6cbce86dc58834c4055d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a275c9cc185fd6cbce86dc58834c4055d">&#9670;&nbsp;</a></span>Server()</h2>
@@ -164,15 +170,25 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00304">304</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p>Construct a new <a class="el" href="class_communication_1_1_server.html">Server</a>:: <a class="el" href="class_communication_1_1_server.html">Server</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td></td></tr>
+    <tr><td class="paramname">number_of_thread</td><td></td></tr>
+    <tr><td class="paramname">process</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00391">391</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_server_a275c9cc185fd6cbce86dc58834c4055d_cgraph.png" border="0" usemap="#class_communication_1_1_server_a275c9cc185fd6cbce86dc58834c4055d_cgraph" alt=""/></div>
 <map name="class_communication_1_1_server_a275c9cc185fd6cbce86dc58834c4055d_cgraph" id="class_communication_1_1_server_a275c9cc185fd6cbce86dc58834c4055d_cgraph">
-<area shape="rect"  title=" " alt="" coords="5,35,180,76"/>
-<area shape="rect"  href="class_communication_1_1_server_socket.html#ad17ffa7166fb28571ff78a9b1b5328c1" title=" " alt="" coords="242,5,461,47"/>
-<area shape="rect"  href="class_communication_1_1_server_socket.html#a0b4f9c1e1ae2d9431616293ea230d18c" title=" " alt="" coords="228,71,475,98"/>
+<area shape="rect"  title="Construct a new Server:: Server object." alt="" coords="5,35,180,76"/>
+<area shape="rect"  href="class_communication_1_1_server_socket.html#ad17ffa7166fb28571ff78a9b1b5328c1" title="Add listener to EPOLL events listeners." alt="" coords="242,5,461,47"/>
+<area shape="rect"  href="class_communication_1_1_server_socket.html#a0b4f9c1e1ae2d9431616293ea230d18c" title="Configure EPOLL file descriptors and listen for EPOLL events and log messages." alt="" coords="228,71,475,98"/>
 </map>
 </div>
 
@@ -203,9 +219,17 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Call on every client connected event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a3dba3f897b4d418c574d30389c7364b9">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00310">310</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00402">402</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>
@@ -243,16 +267,25 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Call on every data received event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
+    <tr><td class="paramname">data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a6fd3e0bd3676f2da9669c67110939c54">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00325">325</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00434">434</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_communication_1_1_server_a1d4ae5637b756920d350d5e86a06ea13_cgraph.png" border="0" usemap="#class_communication_1_1_server_a1d4ae5637b756920d350d5e86a06ea13_cgraph" alt=""/></div>
 <map name="class_communication_1_1_server_a1d4ae5637b756920d350d5e86a06ea13_cgraph" id="class_communication_1_1_server_a1d4ae5637b756920d350d5e86a06ea13_cgraph">
-<area shape="rect"  title=" " alt="" coords="5,5,180,47"/>
-<area shape="rect"  href="class_communication_1_1_thread_pool.html#a27cee5163757473a4a3c32a70fa9b3ef" title=" " alt="" coords="228,5,435,47"/>
+<area shape="rect"  title="Call on every data received event." alt="" coords="5,5,180,47"/>
+<area shape="rect"  href="class_communication_1_1_thread_pool.html#a27cee5163757473a4a3c32a70fa9b3ef" title="Add packet to be process by the thread poll." alt="" coords="228,5,435,47"/>
 </map>
 </div>
 
@@ -292,9 +325,18 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Call on every data sent event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
+    <tr><td class="paramname">data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a7422955932d17e19e64747aa325b3c9d">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00320">320</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00423">423</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>
@@ -322,9 +364,17 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Call on every client disconnected event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a67e292f5691fedfb26893b46fbf7e81e">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00315">315</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00412">412</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>
@@ -352,9 +402,17 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Call on every exception event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a9e31db044e75d26599ea30427ee4bdc5">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00331">331</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00444">444</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>

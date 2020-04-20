@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['isocketeventlistener',['ISocketEventListener',['../class_communication_1_1_i_socket_event_listener.html',1,'Communication']]]
+  ['deconnection',['Deconnection',['../class_message_1_1_deconnection.html',1,'Message']]],
+  ['duck',['Duck',['../class_message_1_1_duck.html',1,'Message']]]
 ];

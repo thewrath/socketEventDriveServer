@@ -1,4 +1,4 @@
 <map id="Communication::Server::onDataReceive" name="Communication::Server::onDataReceive">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,180,47"/>
-<area shape="rect" id="node2" href="$class_communication_1_1_thread_pool.html#a27cee5163757473a4a3c32a70fa9b3ef" title=" " alt="" coords="228,5,435,47"/>
+<area shape="rect" id="node1" title="Call on every data received event." alt="" coords="5,5,180,47"/>
+<area shape="rect" id="node2" href="$class_communication_1_1_thread_pool.html#a27cee5163757473a4a3c32a70fa9b3ef" title="Add packet to be process by the thread poll." alt="" coords="228,5,435,47"/>
 </map>

@@ -1,6 +1,6 @@
 # Serveur TCP du projet What The Duck
 
-## Compiler les programmes
+## Compiler le serveur
 
 Créez le dossier bin
 
@@ -22,5 +22,9 @@ La librairie système EPOLL (sur Linux) est utilisée pour offrir une gestion as
 ## Utilisation d'un pool de thread
 Le système met aussi en place un thread de pool, l'interet de ce genre de mécanisme est d'avoir une gestion plus fine de nos threads, on peut ainsi aisément recycler des threads plutôt que de les détruire et les reconstruire (qui sont des instructions coûteuses).
 
-## Utilisation de Google Protocol Buffers
-La librairie Protocol buffers est utilisé pour structurer et sérializer les messages sur la communication TCP.
+## Format des message
+Les messages sont sérialisés en respecant le format suivant : 
+
+``message_type:length:attr1:attr2:attrn;``
+
+L'opérateur ``:`` servant de séparateur aux options du message et l'opérateur ``;`` servant de séparateur entre les messages.

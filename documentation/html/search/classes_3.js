@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jsonloader',['JsonLoader',['../class_configuration_1_1_json_loader.html',1,'Configuration']]]
+  ['isocketeventlistener',['ISocketEventListener',['../class_communication_1_1_i_socket_event_listener.html',1,'Communication']]]
 ];

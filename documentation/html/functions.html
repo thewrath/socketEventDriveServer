@@ -97,15 +97,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>address
 : <a class="el" href="class_communication_1_1_socket.html#a17c86bef4884df372baa988917ece9d0">Communication::Socket</a>
 </li>
-<li>aX
-: <a class="el" href="class_w_t_d_1_1_duck.html#ae4bc6f51c8c390110d98ccbfccee5f1d">WTD::Duck</a>
-</li>
-<li>aY
-: <a class="el" href="class_w_t_d_1_1_duck.html#a8bb6703d5639aa6b5ca91f6a401e903c">WTD::Duck</a>
-</li>
-<li>aZ
-: <a class="el" href="class_w_t_d_1_1_duck.html#a1e9f1be559852881b4e0a02b04ee69f2">WTD::Duck</a>
-</li>
 </ul>
 
 
@@ -116,6 +107,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>ConfigurationReadException()
 : <a class="el" href="struct_configuration_1_1_configuration_read_exception.html#a9b947ea269fa7faa72212375bc6c237e">Configuration::ConfigurationReadException</a>
 </li>
+<li>Connection()
+: <a class="el" href="class_message_1_1_connection.html#aeb08669455b809ca6e501d1286e3413f">Message::Connection</a>
+</li>
 </ul>
 
 
@@ -123,17 +117,29 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>data
 : <a class="el" href="struct_communication_1_1_packet.html#aa106cdfcfcfb38af30bf4e595be3952f">Communication::Packet</a>
 </li>
+<li>DebugString()
+: <a class="el" href="class_message_1_1_base.html#aef2dd9eb246fde0de02bd03c86940050">Message::Base</a>
+, <a class="el" href="class_message_1_1_connection.html#a55449dbab876c3d239afddc592fbf3ba">Message::Connection</a>
+, <a class="el" href="class_message_1_1_deconnection.html#aa470fce12d32fbf71ad8926daebb5eca">Message::Deconnection</a>
+, <a class="el" href="class_message_1_1_duck.html#aa91c23679190f99f66f11b22b03ef384">Message::Duck</a>
+</li>
+<li>Deconnection()
+: <a class="el" href="class_message_1_1_deconnection.html#a9ee6ddf8b70e4c2cbde5176a6d24833c">Message::Deconnection</a>
+</li>
 <li>description
 : <a class="el" href="struct_communication_1_1_packet.html#ac5cc19339591b7a053cf0cb21207bee4">Communication::Packet</a>
 , <a class="el" href="class_communication_1_1_socket.html#a336f49d0ebb2db5e445fe0f06ba6f1a9">Communication::Socket</a>
 </li>
 <li>Duck()
-: <a class="el" href="class_w_t_d_1_1_duck.html#ad113bc57d4341271602ec4978b0b869b">WTD::Duck</a>
+: <a class="el" href="class_message_1_1_duck.html#a4626a777cc6af0eb95eddf9831009979">Message::Duck</a>
 </li>
 </ul>
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>GetType()
+: <a class="el" href="class_message_1_1_base.html#a8c908c0d4f8680ffc3492b0f61ba579b">Message::Base</a>
+</li>
 <li>getValue()
 : <a class="el" href="class_configuration_1_1_json_loader.html#a8c2175bd99608f98475f8b49771c3320">Configuration::JsonLoader</a>
 </li>
@@ -179,6 +185,16 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </ul>
 
 
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>ParseFromString()
+: <a class="el" href="class_message_1_1_base.html#aac23c5926ef6dce1e0eb35f8ec12f491">Message::Base</a>
+, <a class="el" href="class_message_1_1_connection.html#ac23375e9d0aab8b5f296b406a9ba8fd3">Message::Connection</a>
+, <a class="el" href="class_message_1_1_deconnection.html#a1d956ab4f5637f56dc966c0b61d001d0">Message::Deconnection</a>
+, <a class="el" href="class_message_1_1_duck.html#a50b6b38cd3e593fed273647e1315a213">Message::Duck</a>
+</li>
+</ul>
+
+
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>removeEventListener()
 : <a class="el" href="class_communication_1_1_server_socket.html#af004d0a1f06f208891a32796b8950bbf">Communication::ServerSocket</a>
@@ -190,14 +206,38 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>serialize()
-: <a class="el" href="class_w_t_d_1_1_duck.html#a64301cc43a28c666ebe950a6a0bc8992">WTD::Duck</a>
+<li>SerializeToString()
+: <a class="el" href="class_message_1_1_base.html#a11640f596e6f262469031a9aa0238d83">Message::Base</a>
+, <a class="el" href="class_message_1_1_connection.html#a9eb0a2c45186b809ecb8983df7d042bc">Message::Connection</a>
+, <a class="el" href="class_message_1_1_deconnection.html#acc678dbd3fc9e4583de1a52bd8c35861">Message::Deconnection</a>
+, <a class="el" href="class_message_1_1_duck.html#aec5987bf0c69d9d445144b2157036e15">Message::Duck</a>
 </li>
 <li>Server()
 : <a class="el" href="class_communication_1_1_server.html#a275c9cc185fd6cbce86dc58834c4055d">Communication::Server</a>
 </li>
 <li>ServerSocket()
 : <a class="el" href="class_communication_1_1_server_socket.html#a49a7d9dbce481ec5b2c783c92c00975d">Communication::ServerSocket</a>
+</li>
+<li>set_ax()
+: <a class="el" href="class_message_1_1_duck.html#a8e13404768e6cd8017b8deea4851ab2f">Message::Duck</a>
+</li>
+<li>set_ay()
+: <a class="el" href="class_message_1_1_duck.html#ac2bb07f5794e0e3639b4203ebc849aca">Message::Duck</a>
+</li>
+<li>set_az()
+: <a class="el" href="class_message_1_1_duck.html#ae67db47dbd2c45534d93ab50346293df">Message::Duck</a>
+</li>
+<li>set_sound()
+: <a class="el" href="class_message_1_1_duck.html#a309dcd81c96309c6fbeae7cb72cd2ac0">Message::Duck</a>
+</li>
+<li>set_x()
+: <a class="el" href="class_message_1_1_duck.html#ac8717712594619a73e95a6e1d3041a62">Message::Duck</a>
+</li>
+<li>set_y()
+: <a class="el" href="class_message_1_1_duck.html#a7d667a0123d6b83461f18c16759ed6f8">Message::Duck</a>
+</li>
+<li>set_z()
+: <a class="el" href="class_message_1_1_duck.html#a55f6b16286a6aaec33ebb846a5e030d1">Message::Duck</a>
 </li>
 <li>setNonBlocking()
 : <a class="el" href="class_communication_1_1_socket.html#a79259c6bb4eadefcd9c0420a52c7c900">Communication::Socket</a>
@@ -211,9 +251,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>SocketException()
 : <a class="el" href="struct_communication_1_1_socket_exception.html#ac3584c45385499e0e61adbd16b36842f">Communication::SocketException</a>
 </li>
-<li>sound
-: <a class="el" href="class_w_t_d_1_1_duck.html#a67445218fbb12537b28f48b501d87a0e">WTD::Duck</a>
-</li>
 </ul>
 
 
@@ -223,6 +260,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>threadWork()
 : <a class="el" href="class_communication_1_1_thread_pool.html#a855f6f4457a11d1a01e36e9dca989f32">Communication::ThreadPool</a>
+</li>
+<li>type
+: <a class="el" href="class_message_1_1_base.html#a45d3dc26d321f26865ca12fd5b5ebc8a">Message::Base</a>
 </li>
 </ul>
 
@@ -234,27 +274,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>write()
 : <a class="el" href="class_communication_1_1_socket.html#a2b7237a084aa6417207592ce2e045a83">Communication::Socket</a>
-</li>
-</ul>
-
-
-<h3><a id="index_x"></a>- x -</h3><ul>
-<li>x
-: <a class="el" href="class_w_t_d_1_1_duck.html#a9168ab584d42291db8f3ac59817d91ba">WTD::Duck</a>
-</li>
-</ul>
-
-
-<h3><a id="index_y"></a>- y -</h3><ul>
-<li>y
-: <a class="el" href="class_w_t_d_1_1_duck.html#ad20a519105b68a9a2cd8a76763e047cf">WTD::Duck</a>
-</li>
-</ul>
-
-
-<h3><a id="index_z"></a>- z -</h3><ul>
-<li>z
-: <a class="el" href="class_w_t_d_1_1_duck.html#af23bcc69bf01ce7b5709811e9028c623">WTD::Duck</a>
 </li>
 </ul>
 

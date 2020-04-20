@@ -1,5 +1,5 @@
 <map id="Communication::Socket::write" name="Communication::Socket::write">
-<area shape="rect" id="node1" title=" " alt="" coords="321,5,497,47"/>
-<area shape="rect" id="node2" href="$server__main_8cpp.html#af7382bb51399ec2bbbe04a7e6aebf366" title=" " alt="" coords="108,13,273,39"/>
-<area shape="rect" id="node3" href="$server__main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect" id="node1" title="Procedure to write on socket designed by description attribut in packet." alt="" coords="321,5,497,47"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#af7382bb51399ec2bbbe04a7e6aebf366" title=" " alt="" coords="108,13,273,39"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,60,39"/>
 </map>

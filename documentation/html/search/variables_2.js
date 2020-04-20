@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['data',['data',['../struct_communication_1_1_packet.html#aa106cdfcfcfb38af30bf4e595be3952f',1,'Communication::Packet']]],
-  ['description',['description',['../struct_communication_1_1_packet.html#ac5cc19339591b7a053cf0cb21207bee4',1,'Communication::Packet::description()'],['../class_communication_1_1_socket.html#a336f49d0ebb2db5e445fe0f06ba6f1a9',1,'Communication::Socket::description()']]],
-  ['ducks',['ducks',['../server__main_8cpp.html#a4e533c528c7bb1b1e0c4ceda4fc6fe6f',1,'server_main.cpp']]]
+  ['message',['message',['../struct_communication_1_1_socket_exception.html#aaeb040768e61a31a9e00e645d2a060b7',1,'Communication::SocketException::message()'],['../struct_configuration_1_1_configuration_read_exception.html#a8d84274c6d8af7f7e03460828e9d53ca',1,'Configuration::ConfigurationReadException::message()']]]
 ];
