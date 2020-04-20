@@ -4,7 +4,7 @@ namespace Message
 {
     std::string Base::SerializeToString()
     {
-        return this->type+";";
+        return std::to_string(this->type)+";";
     }
 
     std::string Base::DebugString()
@@ -14,27 +14,34 @@ namespace Message
 
     void Base::ParseFromString(std::string data)
     {
-        
+
+    }
+
+    MessageType Base::GetType(std::string data)
+    {
+        std::string data_type = "";
+        for(char& c : data) {
+            if(c == ':' || c == ';'){
+                break;    
+            }
+            data_type += c;
+        }
+        return (MessageType) atoi(data_type.c_str());
+    }
+
+    Connection::Connection()
+    {
+        this->type = MessageType::connection;
+    }
+
+    Deconnection::Deconnection()
+    {
+        this->type = MessageType::deconnection;
     }
 
     Duck::Duck()
     {
-        this->type = "duck";
-    }
-
-    std::string Duck::SerializeToString()
-    {
-        return Base::SerializeToString();
-    }
-
-    std::string Duck::DebugString()
-    {
-        return Base::DebugString();
-    }
-
-    void Duck::ParseFromString(std::string data)
-    {
-        Base::ParseFromString(data);
+        this->type = MessageType::duck;
     }
 
     void Duck::set_sound(std::string sound){this->sound = sound;}

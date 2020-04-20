@@ -11,16 +11,31 @@ void WTDPacketProcessing(Communication::Packet packet)
     std::cout << "Inside packet processing" << std::endl;
     std::cout << packet.data << std::endl;
 
-    // Send protobuffer message test
-    for(auto& duck : ducks){
-        Communication::Packet response{packet.description, duck.SerializeToString()};
-        std::cout << duck.DebugString() << std::endl;
-        try {
-            Communication::Socket::write(response);
-        } catch(Communication::SocketException& e) {
-            std::cout << "Client disconnected during socket writing" << std::endl;
+    switch (Message::Base::GetType(packet.data))
+    {
+        case Message::MessageType::connection:
+            // It's a connection message
+            // Send ducks to initialize
+            for(auto& duck : ducks){
+                Communication::Packet response{packet.description, duck.SerializeToString()};
+                std::cout << duck.DebugString() << std::endl;
+                try {
+                    Communication::Socket::write(response);
+                } catch(Communication::SocketException& e) {
+                    std::cout << "Client disconnected during socket writing" << std::endl;
+                    break;
+                }
+            }
             break;
-        }
+        
+        case Message::MessageType::deconnection:
+            // It's a deconnection message
+            break;
+
+        default:
+            // Unknow message type
+            std::cout << "package type " << std::to_string(Message::Base::GetType(packet.data)) << std::endl;
+            break;
     }
 }
 // function to load duck messages from json configuration

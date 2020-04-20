@@ -7,15 +7,42 @@
 
 namespace Message 
 {
+
+    enum MessageType {
+        base = 0,
+        connection = 1, 
+        deconnection = 2, 
+        duck = 3 
+    };
+
     class Base 
     {
-        protected: 
-            std::string type = "base";
-
-        public:
+        protected:
+            MessageType type = MessageType::base;
+        public: 
             std::string SerializeToString();
             std::string DebugString();
             void ParseFromString(std::string);
+            
+            static MessageType GetType(std::string);
+    };
+
+    class Connection : Base
+    {
+        public:
+            Connection();
+            std::string SerializeToString() { return Base::SerializeToString(); };
+            std::string DebugString() { return Base::DebugString(); };
+            void ParseFromString(std::string data) { return Base::ParseFromString(data); };
+    };
+
+    class Deconnection : Base
+    {
+        public:
+            Deconnection();
+            std::string SerializeToString() { return Base::SerializeToString(); };
+            std::string DebugString() { return Base::DebugString(); };
+            void ParseFromString(std::string data) { return Base::ParseFromString(data); };
     };
 
     class Duck : Base
@@ -28,12 +55,11 @@ namespace Message
             float ax;
             float ay;
             float az;
-
         public:
             Duck();
-            std::string SerializeToString();
-            std::string DebugString();
-            void ParseFromString(std::string);
+            std::string SerializeToString() { return Base::SerializeToString(); };
+            std::string DebugString() { return Base::DebugString(); };
+            void ParseFromString(std::string data) { return Base::ParseFromString(data); };
 
             void set_sound(std::string);
             void set_x(float);
