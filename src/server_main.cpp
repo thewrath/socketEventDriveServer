@@ -53,9 +53,9 @@ std::vector<Message::Duck> LoadDucksFromJson(Json::Value root)
         duck.set_x(root["ducks"][i]["position"]["x"].asFloat());
         duck.set_y(root["ducks"][i]["position"]["y"].asFloat());
         duck.set_z(root["ducks"][i]["position"]["z"].asFloat());
-        duck.set_ax(root["ducks"][i]["orientation"]["x"].asFloat());
-        duck.set_ay(root["ducks"][i]["orientation"]["y"].asFloat());
-        duck.set_az(root["ducks"][i]["orientation"]["z"].asFloat());
+        duck.set_ax(root["ducks"][i]["direction"]["x"].asFloat());
+        duck.set_ay(root["ducks"][i]["direction"]["y"].asFloat());
+        duck.set_az(root["ducks"][i]["direction"]["z"].asFloat());
         ducks.push_back(duck);
     }
 
