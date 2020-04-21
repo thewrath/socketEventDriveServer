@@ -6,16 +6,48 @@
  */
 namespace Communication
 {
+    
+    /**
+     * @brief Call on every client connected event 
+     * 
+     * @param fd socket file description
+     */
     void ISocketEventListener::onConnect(int fd) {}
+
+    /**
+     * @brief Call on every client disconnected event
+     * 
+     * @param fd socket file description
+     */
     void ISocketEventListener::onDisconnect(int fd) {}
+
+    /**
+     * @brief Call on every data sent event
+     * 
+     * @param fd socket file description
+     * @param data data attach to the send event
+     */
     void ISocketEventListener::onDataSend(int fd, const std::vector<char>& data) {}
+
+    /**
+     * @brief Call on every data received event
+     * 
+     * @param fd Socket file description
+     * @param data data attach to the receive event
+     */
     void ISocketEventListener::onDataReceive(int fd, const std::vector<char>& data) {}
+
+    /**
+     * @brief Call on every exception event
+     * 
+     * @param exception exception to manage
+     */
     void ISocketEventListener::onSocketException(SocketException exception) {}
 
     /**
      * @brief Construct a new Socket:: Socket object
      * 
-     * @param port the socket port
+     * @param port
      */
     Socket::Socket(unsigned int port)
     {
@@ -47,7 +79,7 @@ namespace Communication
     /**
      * @brief Procedure to set socket designed by fg argument in non-blocking mode
      * 
-     * @param fd Socket file description
+     * @param fd socket file description
      */
     void Socket::setNonBlocking(int fd) {
         int options;
@@ -63,7 +95,7 @@ namespace Communication
     /**
      * @brief Construct a new Server Socket:: Server Socket object
      * 
-     * @param port The port to listen on
+     * @param port the port to listen on
      */
     ServerSocket::ServerSocket(unsigned int port) : Socket(port)
     {
@@ -87,7 +119,7 @@ namespace Communication
     }
 
     /**
-     * @brief Configure EPOLL file descriptors and listen for EPOLL events and log messages   
+     * @brief configure EPOLL file descriptors and listen for EPOLL events and log messages   
      * 
      */
     void ServerSocket::run()
@@ -129,7 +161,7 @@ namespace Communication
     }
 
     /**
-     * @brief Handler to process EPOLL main socket file descriptor activities 
+     * @brief handler to process EPOLL main socket file descriptor activities 
      * 
      */
     void ServerSocket::handleListeningFileDescriptorActivity() {
@@ -160,7 +192,7 @@ namespace Communication
     /**
      * @brief Handler to process EPOLL client socket file descriptor activities 
      * 
-     * @param index Event index in the events array
+     * @param index event index in the events array
      */
     void ServerSocket::handleClientFileDescriptorActivity(int index) {
         if (this->events[index].events & EPOLLIN) {
@@ -232,7 +264,7 @@ namespace Communication
     /**
      * @brief Dispatch client disconnected event 
      * 
-     * @param fd Socket file description 
+     * @param fd socket file description 
      */
     void ServerSocket::raiseClientDisconnectedEvent(int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
@@ -243,7 +275,7 @@ namespace Communication
     /**
      * @brief Dispatch client connected event
      * 
-     * @param fd Socket file description
+     * @param fd socket file description
      */
     void ServerSocket::raiseClientConnectedEvent(int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
@@ -254,8 +286,8 @@ namespace Communication
     /**
      * @brief Dispatch data send event
      * 
-     * @param data Data attach to the event 
-     * @param fd Socket file description
+     * @param data data attach to the event 
+     * @param fd socket file description
      */
     void ServerSocket::raiseDataSendEvent(const std::vector<char> &data, int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
@@ -266,8 +298,8 @@ namespace Communication
     /**
      * @brief Dispatch data received event
      * 
-     * @param data Data attach to the event
-     * @param fd Socket file description
+     * @param data data attach to the event
+     * @param fd socket file description
      */
     void ServerSocket::raiseDataReceivedEvent(const std::vector<char> &data, int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
@@ -278,7 +310,7 @@ namespace Communication
     /**
      * @brief Dispatch EPOLL exception event
      * 
-     * @param exception Exception to raised
+     * @param exception exception to raised
      */
     void ServerSocket::raiseSocketExceptionEvent(SocketException exception) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
@@ -289,7 +321,7 @@ namespace Communication
     /**
      * @brief Construct a new Client Socket:: Client Socket object
      * 
-     * @param port Client selected port
+     * @param port client selected port
      */
     ClientSocket::ClientSocket(unsigned int port) : Socket(port)
     {
@@ -299,7 +331,7 @@ namespace Communication
     /**
      * @brief Construct a new Thread Pool:: Thread Pool object
      * 
-     * @param number_of_thread Number of thread to be used by the pool
+     * @param number_of_thread number of thread to be used by the pool
      * @param process how a packet is process
      */
     ThreadPool::ThreadPool(int number_of_thread, processPacket process)
@@ -360,12 +392,12 @@ namespace Communication
     /**
      * @brief Thread job (take packet in the packets queue and process it) 
      * 
-     * @param threadID 
-     * @param terminate_pool 
-     * @param condition 
-     * @param queueMutex 
-     * @param packets 
-     * @param process 
+     * @param threadID thread id in the pool
+     * @param terminate_pool flag, if the pool want to shutdown
+     * @param condition for concurrent access on the packets std::queue
+     * @param queueMutex for concurrent access on the packets std::queue
+     * @param packets std::queue for packets internal transmission
+     * @param process how to process a packet
      */
     void ThreadPool::threadWork(int threadID, bool* terminate_pool, std::condition_variable* condition, std::mutex* queueMutex, std::queue<Packet>* packets, processPacket process)
     {
@@ -384,9 +416,9 @@ namespace Communication
     /**
      * @brief Construct a new Server:: Server object
      * 
-     * @param port 
-     * @param number_of_thread 
-     * @param process 
+     * @param port the to listen on
+     * @param number_of_thread max number of thread for the pool
+     * @param process how to process a packet 
      */
     Server::Server(unsigned int port, int number_of_thread, processPacket process) : masterSocket(port), threadPool(number_of_thread, process)
     {
@@ -394,53 +426,26 @@ namespace Communication
         this->masterSocket.run();
     }
 
-    /**
-     * @brief Call on every client connected event 
-     * 
-     * @param fd Socket file description
-     */
     void Server::onConnect(int fd)
     {
         std::cout << "New client connected" << std::endl;
     }
 
-    /**
-     * @brief Call on every client disconnected event
-     * 
-     * @param fd Socket file description
-     */
     void Server::onDisconnect(int fd)
     {
         std::cout << "Client disconnected" << std::endl;
     }
 
-    /**
-     * @brief Call on every data sent event
-     * 
-     * @param fd Socket file description
-     * @param data 
-     */
     void Server::onDataSend(int fd, const std::vector<char>& data)
     {
         std::cout << "Client sending data." << std::endl;
     }
 
-    /**
-     * @brief Call on every data received event
-     * 
-     * @param fd Socket file description
-     * @param data 
-     */
     void Server::onDataReceive(int fd, const std::vector<char>& data)
     {
         this->threadPool.addPacket(Packet{fd, std::string(data.begin(), data.end())});
     }
 
-    /**
-     * @brief Call on every exception event
-     * 
-     * @param exception 
-     */
     void Server::onSocketException(SocketException exception)
     {
         std::cout << exception.message << std::endl;

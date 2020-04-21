@@ -173,14 +173,14 @@ Public Member Functions</h2></td></tr>
 <p>Construct a new <a class="el" href="class_communication_1_1_server.html">Server</a>:: <a class="el" href="class_communication_1_1_server.html">Server</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">port</td><td></td></tr>
-    <tr><td class="paramname">number_of_thread</td><td></td></tr>
-    <tr><td class="paramname">process</td><td></td></tr>
+    <tr><td class="paramname">port</td><td>the to listen on </td></tr>
+    <tr><td class="paramname">number_of_thread</td><td>max number of thread for the pool </td></tr>
+    <tr><td class="paramname">process</td><td>how to process a packet </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00391">391</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00423">423</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -188,7 +188,7 @@ Here is the call graph for this function:</div>
 <map name="class_communication_1_1_server_a275c9cc185fd6cbce86dc58834c4055d_cgraph" id="class_communication_1_1_server_a275c9cc185fd6cbce86dc58834c4055d_cgraph">
 <area shape="rect"  title="Construct a new Server:: Server object." alt="" coords="5,35,180,76"/>
 <area shape="rect"  href="class_communication_1_1_server_socket.html#ad17ffa7166fb28571ff78a9b1b5328c1" title="Add listener to EPOLL events listeners." alt="" coords="242,5,461,47"/>
-<area shape="rect"  href="class_communication_1_1_server_socket.html#a0b4f9c1e1ae2d9431616293ea230d18c" title="Configure EPOLL file descriptors and listen for EPOLL events and log messages." alt="" coords="228,71,475,98"/>
+<area shape="rect"  href="class_communication_1_1_server_socket.html#a0b4f9c1e1ae2d9431616293ea230d18c" title="configure EPOLL file descriptors and listen for EPOLL events and log messages" alt="" coords="228,71,475,98"/>
 </map>
 </div>
 
@@ -222,14 +222,14 @@ Here is the call graph for this function:</div>
 <p>Call on every client connected event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
+    <tr><td class="paramname">fd</td><td>socket file description </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a3dba3f897b4d418c574d30389c7364b9">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00402">402</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00429">429</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>
@@ -271,14 +271,14 @@ Here is the call graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
-    <tr><td class="paramname">data</td><td></td></tr>
+    <tr><td class="paramname">data</td><td>data attach to the receive event </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a6fd3e0bd3676f2da9669c67110939c54">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00434">434</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00444">444</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -328,15 +328,15 @@ Here is the call graph for this function:</div>
 <p>Call on every data sent event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
-    <tr><td class="paramname">data</td><td></td></tr>
+    <tr><td class="paramname">fd</td><td>socket file description </td></tr>
+    <tr><td class="paramname">data</td><td>data attach to the send event </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a7422955932d17e19e64747aa325b3c9d">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00423">423</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00439">439</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>
@@ -367,14 +367,14 @@ Here is the call graph for this function:</div>
 <p>Call on every client disconnected event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fd</td><td><a class="el" href="class_communication_1_1_socket.html">Socket</a> file description </td></tr>
+    <tr><td class="paramname">fd</td><td>socket file description </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a67e292f5691fedfb26893b46fbf7e81e">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00412">412</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00434">434</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>
@@ -405,14 +405,14 @@ Here is the call graph for this function:</div>
 <p>Call on every exception event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">exception</td><td></td></tr>
+    <tr><td class="paramname">exception</td><td>exception to manage </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_communication_1_1_i_socket_event_listener.html#a9e31db044e75d26599ea30427ee4bdc5">Communication::ISocketEventListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00444">444</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00449">449</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 
 </div>
 </div>

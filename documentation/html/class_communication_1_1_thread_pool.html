@@ -150,13 +150,13 @@ Static Public Member Functions</h2></td></tr>
 <p>Construct a new Thread Pool:: Thread Pool object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">number_of_thread</td><td>Number of thread to be used by the pool </td></tr>
+    <tr><td class="paramname">number_of_thread</td><td>number of thread to be used by the pool </td></tr>
     <tr><td class="paramname">process</td><td>how a packet is process </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00305">305</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00337">337</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -186,7 +186,7 @@ Here is the call graph for this function:</div>
 
 <p>Destroy the Thread Pool:: Thread Pool object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00317">317</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00349">349</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -224,7 +224,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00329">329</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00361">361</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -254,7 +254,7 @@ Here is the caller graph for this function:</div>
 
 <p>Shutdown thread poll (join all thread) </p>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00342">342</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00374">374</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -328,17 +328,17 @@ Here is the caller graph for this function:</div>
 <p>Thread job (take packet in the packets queue and process it) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadID</td><td></td></tr>
-    <tr><td class="paramname">terminate_pool</td><td></td></tr>
-    <tr><td class="paramname">condition</td><td></td></tr>
-    <tr><td class="paramname">queueMutex</td><td></td></tr>
-    <tr><td class="paramname">packets</td><td></td></tr>
-    <tr><td class="paramname">process</td><td></td></tr>
+    <tr><td class="paramname">threadID</td><td>thread id in the pool </td></tr>
+    <tr><td class="paramname">terminate_pool</td><td>flag, if the pool want to shutdown </td></tr>
+    <tr><td class="paramname">condition</td><td>for concurrent access on the packets std::queue </td></tr>
+    <tr><td class="paramname">queueMutex</td><td>for concurrent access on the packets std::queue </td></tr>
+    <tr><td class="paramname">packets</td><td>std::queue for packets internal transmission </td></tr>
+    <tr><td class="paramname">process</td><td>how to process a packet </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00370">370</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_communication_8cpp_source.html#l00402">402</a> of file <a class="el" href="_communication_8cpp_source.html">Communication.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
