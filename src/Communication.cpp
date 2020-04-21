@@ -6,7 +6,7 @@
  */
 namespace Communication
 {
-    
+
     /**
      * @brief Call on every client connected event 
      * 
@@ -60,6 +60,30 @@ namespace Communication
         this->address.sin_addr.s_addr = INADDR_ANY;
         this->address.sin_port = htons(port);
         this->address.sin_family = AF_INET;
+    }
+
+    /**
+     * @brief Construct a new Socket:: Socket object
+     * 
+     * @param port
+     * @param address
+     */
+    Socket::Socket(unsigned int port, std::string address)
+    {
+        sockaddr_in server_addr;
+        this->description = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+        if (this->description < 0) {
+            throw SocketException("Erreur initialisation socket.");
+        }
+
+        this->address.sin_port = htons(port);
+        this->address.sin_family = AF_INET;
+
+        if(inet_pton(AF_INET, address.c_str(), &server_addr.sin_addr)<=0)  
+        { 
+            throw SocketException("Invalid address");
+        }
 
     }
 
@@ -72,7 +96,7 @@ namespace Communication
     {
         int n = send(packet.description, packet.data.c_str(), strlen(packet.data.c_str()) + 1, 0);
         if (n < 0) {
-            throw SocketException("ERROR writing to socket");
+            throw SocketException("error on writing to socket");
         }
     }
 
@@ -323,7 +347,7 @@ namespace Communication
      * 
      * @param port client selected port
      */
-    ClientSocket::ClientSocket(unsigned int port) : Socket(port)
+    ClientSocket::ClientSocket(unsigned int port, std::string address) : Socket(port, address)
     {
 
     }
@@ -417,28 +441,39 @@ namespace Communication
      * @brief Construct a new Server:: Server object
      * 
      * @param port the to listen on
+     * @param debugPort for console output
      * @param number_of_thread max number of thread for the pool
      * @param process how to process a packet 
      */
-    Server::Server(unsigned int port, int number_of_thread, processPacket process) : masterSocket(port), threadPool(number_of_thread, process)
+    Server::Server(unsigned int port, unsigned int debugPort, int number_of_thread, processPacket process) : masterSocket(port), threadPool(number_of_thread, process)
     {
         this->masterSocket.addEventListener(this);
         this->masterSocket.run();
     }
 
+    /**
+     * @brief Log message to the debug console (on the debugSocket)
+     * 
+     * @param message 
+     */
+    void Server::log(std::string message)
+    {
+        std::cout << message << std::endl;
+    }
+
     void Server::onConnect(int fd)
     {
-        std::cout << "New client connected" << std::endl;
+        this->log("New client connected");
     }
 
     void Server::onDisconnect(int fd)
     {
-        std::cout << "Client disconnected" << std::endl;
+        this->log("Client disconnected");
     }
 
     void Server::onDataSend(int fd, const std::vector<char>& data)
     {
-        std::cout << "Client sending data." << std::endl;
+        this->log("Client sending data");
     }
 
     void Server::onDataReceive(int fd, const std::vector<char>& data)
@@ -448,6 +483,6 @@ namespace Communication
 
     void Server::onSocketException(SocketException exception)
     {
-        std::cout << exception.message << std::endl;
+        this->log(exception.message);
     }
 }

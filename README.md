@@ -6,9 +6,9 @@ Créez le dossier bin
 
 `` mkdir bin ``
 
-Le serveur se compile avec la commande suivante :
+Le serveur se compile et se lance avec la commande suivante :
 
-`` make server ``
+`` make run ``
 
 ## Tester le serveur TCP
 

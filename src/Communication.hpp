@@ -30,6 +30,7 @@
 
 #include <iostream>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 
 
 namespace Communication 
@@ -67,6 +68,7 @@ namespace Communication
 
         public:
             Socket(unsigned int);
+            Socket(unsigned int, std::string);
             static void write(Packet);
 
             static void setNonBlocking(int);
@@ -101,7 +103,7 @@ namespace Communication
     class ClientSocket : public Socket
     {
         public:
-            ClientSocket(unsigned int);
+            ClientSocket(unsigned int, std::string);
     };
 
     /**
@@ -135,8 +137,10 @@ namespace Communication
             ServerSocket masterSocket;
             ThreadPool threadPool;
 
+            void log(std::string);
+
         public:
-            Server(unsigned int, int, processPacket);
+            Server(unsigned int, unsigned int, int, processPacket);
 
             void onConnect(int fd) override;
             void onDisconnect(int fd) override;

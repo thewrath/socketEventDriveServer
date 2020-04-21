@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
         ducks = LoadDucksFromJson(jsonLoader.getValue());
 
         // Start server 
-        Communication::Server server(3333, std::thread::hardware_concurrency(), (Communication::processPacket) WTDPacketProcessing);
+        Communication::Server server(3333, 6666, std::thread::hardware_concurrency(), (Communication::processPacket) WTDPacketProcessing);
     } else {
         std::cerr << "Cannot start server without configuration file" << std::endl;
         return 1;
