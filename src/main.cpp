@@ -1,8 +1,46 @@
+#include <chrono>
+#include <thread>
+#include <mutex>
+#include <vector>
+
 #include "Configuration.hpp"
 #include "Communication.hpp"
 #include "Message.hpp"
 
+typedef struct
+{
+    int fd;
+    int score;
+    std::vector<int> foundDuckIds;
+} WTDClient;
+
+std::vector<WTDClient> WTDClients;
+std::mutex WTDClientsMutex;
 std::vector<Message::Duck> ducks;
+
+bool WTDCheckClientExists(int fd)
+{
+    std::unique_lock<std::mutex> lock(WTDClientsMutex);
+    bool find = false;
+    for (auto &client : WTDClients)
+    {
+        if(client.fd == fd) {
+            find = true;
+        } 
+    }
+    return find;
+}
+
+void WTDUpdateClientScore(int fd, int point)
+{
+    std::unique_lock<std::mutex> lock(WTDClientsMutex);
+    for (auto &client : WTDClients)
+    {
+        if(client.fd == fd) {
+            client.score = client.score + point;
+        } 
+    }
+}
 
 // Businness code for WTD packet processing
 void WTDPacketProcessing(Communication::Packet packet)
@@ -22,9 +60,12 @@ void WTDPacketProcessing(Communication::Packet packet)
                 try {
                     Communication::Socket::write(response);
                 } catch(Communication::SocketException& e) {
-                    std::cout << "Client disconnected during socket writing" << std::endl;
+                    std::cout << "Cannot send message to client" << std::endl;
                     break;
                 }
+
+                // Sleep for 300ms before resend another packet (because there is no detection of package limit ...)
+                std::this_thread::sleep_for(std::chrono::milliseconds(5000));
             }
             break;
         
@@ -50,6 +91,7 @@ std::vector<Message::Duck> LoadDucksFromJson(Json::Value root)
     for (Json::Value::ArrayIndex i = 0; i != root["ducks"].size(); i++){
         Message::Duck duck;
         duck.set_sound(root["ducks"][i]["sound"].asString());
+        duck.set_id(i);
         duck.set_x(root["ducks"][i]["position"]["x"].asFloat());
         duck.set_y(root["ducks"][i]["position"]["y"].asFloat());
         duck.set_z(root["ducks"][i]["position"]["z"].asFloat());

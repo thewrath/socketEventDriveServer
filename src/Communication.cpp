@@ -128,9 +128,12 @@ namespace Communication
 
         int optval = 1;
         int optlen = sizeof(optval);
-        if(setsockopt(this->description, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
+        //
+        if((setsockopt(this->description, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) ||
+          (setsockopt(this->description, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) < 0)){
             throw SocketException("Cannot set option on socket");
         }
+
 
         if ((this->epollFd = epoll_create1(0)) < 0) {
             throw SocketException("Failed to create epoll instance");
