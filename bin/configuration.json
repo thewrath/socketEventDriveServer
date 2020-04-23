@@ -7,12 +7,12 @@
         },
         {
             "sound":"another greate sound",
-            "position": {"x": -5, "y": 0, "z": 0},
+            "position": {"x": -5, "y": 0, "z": 5},
             "direction": {"x": 0, "y": 0, "z": 0}
         },
         {
             "sound":"fichier_son.wav",
-            "position": {"x": 30, "y": 0, "z": 0},
+            "position": {"x": 30, "y": 0, "z": -15},
             "direction": {"x": 0, "y": 0, "z": 0}
         }
     ]

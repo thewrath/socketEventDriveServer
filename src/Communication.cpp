@@ -248,16 +248,13 @@ namespace Communication
             }
         }
         if (this->events[index].events & EPOLLOUT) {
-            // TODO Implement
-            std::cout << "EPOLLOUT" << std::endl;
+            
         }
         if (this->events[index].events & EPOLLRDHUP) {
-            // TODO Implement
-            std::cout << "EPOLLRDHUP" << std::endl;
+            
         }
         if (this->events[index].events & EPOLLHUP) {
-            // TODO Implement
-            std::cout << "EPOLLHUP" << std::endl;
+            
         }
         if (this->events[index].events & EPOLLERR) {
             close(this->events[index].data.fd);

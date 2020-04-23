@@ -76,7 +76,8 @@ namespace Message
         public:
             int id = 0;
 
-            Found(int id);
+            Found();
+            Found(int);
             std::string SerializeToString();
             std::string DebugString() { return this->SerializeToString(); };
             void ParseFromString(std::string data);
@@ -112,11 +113,13 @@ namespace Message
     class Win : Base
     {
         public:
+            int id = 0;
 
             Win();
-            std::string SerializeToString() { return Base::SerializeToString(); };
+            Win(int);
+            std::string SerializeToString();
             std::string DebugString() { return Base::DebugString(); };
-            void ParseFromString(std::string data) { return Base::ParseFromString(data); };
+            void ParseFromString(std::string data);
     };
 };
 #endif

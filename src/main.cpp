@@ -18,7 +18,35 @@ std::vector<WTDClient> WTDClients;
 std::mutex WTDClientsMutex;
 std::vector<Message::Duck> ducks;
 
-bool WTDCheckClientExists(int fd)
+
+// Never call this function alone (is not thread safe)
+bool WTDCheckDuckAlreadyFound(WTDClient& client, int duckId)
+{
+    bool find = false;
+    for(auto &id : client.foundDuckIds) {
+        if(id == duckId) {
+            find = true;
+            break;
+        }
+    }
+    return find;
+}
+
+void WTDUpdateClientScore(int fd, int duckId, int point)
+{
+    std::lock_guard<std::mutex> lock(WTDClientsMutex);
+    for (auto &client : WTDClients)
+    {
+        if(client.fd == fd && !WTDCheckDuckAlreadyFound(client, duckId)) {
+            client.score = client.score + point;
+            std::cout << "Client score is now : " << std::to_string(client.score) << std::endl;
+            client.foundDuckIds.push_back(duckId);
+            break;
+        } 
+    }
+}
+
+void WTDAddClient(int fd)
 {
     std::unique_lock<std::mutex> lock(WTDClientsMutex);
     bool find = false;
@@ -28,31 +56,36 @@ bool WTDCheckClientExists(int fd)
             find = true;
         } 
     }
-    return find;
+
+    if (!find) {
+        std::cout << "Ajout du client " << std::to_string(fd) << std::endl;
+        WTDClients.push_back(WTDClient{fd});
+    }
 }
 
-void WTDUpdateClientScore(int fd, int point)
+int WTDGetClientScore(int fd)
 {
     std::unique_lock<std::mutex> lock(WTDClientsMutex);
     for (auto &client : WTDClients)
     {
         if(client.fd == fd) {
-            client.score = client.score + point;
+            return client.score;
         } 
     }
+
+    return 0;
 }
 
 // Businness code for WTD packet processing
 void WTDPacketProcessing(Communication::Packet packet)
 {
-    // print received packet 
-    std::cout << "Inside packet processing" << std::endl;
-    std::cout << packet.data << std::endl;
-
+    // Check message type
     switch (Message::Base::GetType(packet.data))
     {
         case Message::MessageType::connection:
             // It's a connection message
+            // Add client into client vector
+            WTDAddClient(packet.description);
             // Send ducks to initialize
             for(auto& duck : ducks){
                 Communication::Packet response{packet.description, duck.SerializeToString()};
@@ -64,8 +97,30 @@ void WTDPacketProcessing(Communication::Packet packet)
                     break;
                 }
 
-                // Sleep for 300ms before resend another packet (because there is no detection of package limit ...)
-                std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+                // Sleep for 300ms before resend another packet
+                std::this_thread::sleep_for(std::chrono::milliseconds(300));
+            }
+            break;
+
+        case Message::MessageType::found:
+            {
+                Message::Found message;
+                message.ParseFromString(packet.data);
+                std::cout << "Found duck message" << std::endl;
+                
+                std::cout << "Client ID" << std::to_string(packet.description) << std::endl;
+                WTDUpdateClientScore(packet.description, message.id, 1);
+                int client_score = WTDGetClientScore(packet.description);
+                // TODO : find the maximum score with configuration file 
+                if(client_score >= 3) {
+                    Message::Win win(packet.description);
+                    Communication::Packet response{packet.description, win.SerializeToString()};
+                    std::unique_lock<std::mutex> lock(WTDClientsMutex);
+                    for(auto &client : WTDClients) {
+                        packet.description = client.fd;
+                        Communication::Socket::write(response);
+                    }
+                }
             }
             break;
         
