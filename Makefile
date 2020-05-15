@@ -12,7 +12,7 @@ build: objects
 	@echo "** Building the server"
 	g++ -o $(BUILD_DIR)server.out *.o $(CFLAGS) $(LIBS)
 
-run: build
+run:
 	@echo "Start server"
 	./bin/server.out ./bin/configuration.json
 
