@@ -1,0 +1,4 @@
+<map id="Communication::ThreadPool::threadWork" name="Communication::ThreadPool::threadWork">
+<area shape="rect" id="node1" title="Thread job (take packet in the packets queue and process it)" alt="" coords="260,5,467,47"/>
+<area shape="rect" id="node2" href="$class_communication_1_1_thread_pool.html#a4c6d99adb5362350ff3fc9ff8fcb43f2" title="Construct a new Thread Pool:: Thread Pool object." alt="" coords="5,5,212,47"/>
+</map>

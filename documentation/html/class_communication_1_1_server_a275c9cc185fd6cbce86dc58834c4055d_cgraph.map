@@ -1,0 +1,5 @@
+<map id="Communication::Server::Server" name="Communication::Server::Server">
+<area shape="rect" id="node1" title="Construct a new Server:: Server object." alt="" coords="5,35,180,76"/>
+<area shape="rect" id="node2" href="$class_communication_1_1_server_socket.html#ad17ffa7166fb28571ff78a9b1b5328c1" title="Add listener to EPOLL events listeners." alt="" coords="242,5,461,47"/>
+<area shape="rect" id="node3" href="$class_communication_1_1_server_socket.html#a0b4f9c1e1ae2d9431616293ea230d18c" title="configure EPOLL file descriptors and listen for EPOLL events and log messages" alt="" coords="228,71,475,98"/>
+</map>

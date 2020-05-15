@@ -1,13 +1,54 @@
 #include "Communication.hpp"
 
+/**
+ * @brief Contains all stuff for TCP communication with multi-clients
+ * 
+ */
 namespace Communication
 {
+
+    /**
+     * @brief Call on every client connected event 
+     * 
+     * @param fd socket file description
+     */
     void ISocketEventListener::onConnect(int fd) {}
+
+    /**
+     * @brief Call on every client disconnected event
+     * 
+     * @param fd socket file description
+     */
     void ISocketEventListener::onDisconnect(int fd) {}
+
+    /**
+     * @brief Call on every data sent event
+     * 
+     * @param fd socket file description
+     * @param data data attach to the send event
+     */
     void ISocketEventListener::onDataSend(int fd, const std::vector<char>& data) {}
+
+    /**
+     * @brief Call on every data received event
+     * 
+     * @param fd Socket file description
+     * @param data data attach to the receive event
+     */
     void ISocketEventListener::onDataReceive(int fd, const std::vector<char>& data) {}
+
+    /**
+     * @brief Call on every exception event
+     * 
+     * @param exception exception to manage
+     */
     void ISocketEventListener::onSocketException(SocketException exception) {}
 
+    /**
+     * @brief Construct a new Socket:: Socket object
+     * 
+     * @param port
+     */
     Socket::Socket(unsigned int port)
     {
         this->description = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -16,22 +57,54 @@ namespace Communication
             throw SocketException("Erreur initialisation socket.");
         }
 
-        // Structure contenant les informations "reseaux" de la socket
-        this->address.sin_addr.s_addr = INADDR_ANY; // on accepte n'importe qu'elle source entrante
-        this->address.sin_port = htons(port); // on precise le port d'ecoute (htons permet de convertir le int du c++ en int reseaux)
-        this->address.sin_family = AF_INET; // on precise qu'il s'agit d'un socket reseau et non inter-processus (AF_UNIX)
+        this->address.sin_addr.s_addr = INADDR_ANY;
+        this->address.sin_port = htons(port);
+        this->address.sin_family = AF_INET;
+    }
+
+    /**
+     * @brief Construct a new Socket:: Socket object
+     * 
+     * @param port
+     * @param address
+     */
+    Socket::Socket(unsigned int port, std::string address)
+    {
+        sockaddr_in server_addr;
+        this->description = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+        if (this->description < 0) {
+            throw SocketException("Erreur initialisation socket.");
+        }
+
+        this->address.sin_port = htons(port);
+        this->address.sin_family = AF_INET;
+
+        if(inet_pton(AF_INET, address.c_str(), &server_addr.sin_addr)<=0)  
+        { 
+            throw SocketException("Invalid address");
+        }
 
     }
 
+    /**
+     * @brief Procedure to write on socket designed by description attribut in packet
+     * 
+     * @param packet the packet to write on the TCP connection
+     */
     void Socket::write(Packet packet)
     {
-        std::cout << "Send response to client :" << packet.data << std::endl;
-        int n = send(packet.description, packet.data.c_str(), packet.data.length(), 0);
+        int n = send(packet.description, packet.data.c_str(), strlen(packet.data.c_str()) + 1, 0);
         if (n < 0) {
-            throw SocketException("ERROR writing to socket");
+            throw SocketException("error on writing to socket");
         }
     }
 
+    /**
+     * @brief Procedure to set socket designed by fg argument in non-blocking mode
+     * 
+     * @param fd socket file description
+     */
     void Socket::setNonBlocking(int fd) {
         int options;
         if ((options = fcntl(fd, F_GETFL)) < 0) {
@@ -43,17 +116,24 @@ namespace Communication
         }
     }
 
+    /**
+     * @brief Construct a new Server Socket:: Server Socket object
+     * 
+     * @param port the port to listen on
+     */
     ServerSocket::ServerSocket(unsigned int port) : Socket(port)
     {
 
         Socket::setNonBlocking(this->description);
 
-        // FIX ME : better OOP style
         int optval = 1;
         int optlen = sizeof(optval);
-        if(setsockopt(this->description, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
+        //
+        if((setsockopt(this->description, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) ||
+          (setsockopt(this->description, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) < 0)){
             throw SocketException("Cannot set option on socket");
         }
+
 
         if ((this->epollFd = epoll_create1(0)) < 0) {
             throw SocketException("Failed to create epoll instance");
@@ -65,6 +145,10 @@ namespace Communication
 
     }
 
+    /**
+     * @brief configure EPOLL file descriptors and listen for EPOLL events and log messages   
+     * 
+     */
     void ServerSocket::run()
     {
         if (listen(this->description, 10) < 0) {
@@ -103,16 +187,20 @@ namespace Communication
         }
     }
 
+    /**
+     * @brief handler to process EPOLL main socket file descriptor activities 
+     * 
+     */
     void ServerSocket::handleListeningFileDescriptorActivity() {
 
-        // accept client connection
+        // Accept client connection
         socklen_t addressLen = sizeof(this->address);
         int fd = accept(this->description, (struct sockaddr *) &this->address, &addressLen);
         if (fd < 0) {
             throw SocketException("Invalid file descriptor from accepted connection ");
         }
 
-        // Set fd to be non blocking, this function raised error if failed (they are catch in the main loop)
+        // Set fd to be non blocking, this function raised error if failed
         Socket::setNonBlocking(fd);
 
         // Monitor read and write operations, set edge-triggered
@@ -128,6 +216,11 @@ namespace Communication
         this->raiseClientConnectedEvent(fd);
     }
 
+    /**
+     * @brief Handler to process EPOLL client socket file descriptor activities 
+     * 
+     * @param index event index in the events array
+     */
     void ServerSocket::handleClientFileDescriptorActivity(int index) {
         if (this->events[index].events & EPOLLIN) {
 
@@ -155,16 +248,13 @@ namespace Communication
             }
         }
         if (this->events[index].events & EPOLLOUT) {
-            // TODO Implement
-            std::cout << "EPOLLOUT" << std::endl;
+            
         }
         if (this->events[index].events & EPOLLRDHUP) {
-            // TODO Implement
-            std::cout << "EPOLLRDHUP" << std::endl;
+            
         }
         if (this->events[index].events & EPOLLHUP) {
-            // TODO Implement
-            std::cout << "EPOLLHUP" << std::endl;
+            
         }
         if (this->events[index].events & EPOLLERR) {
             close(this->events[index].data.fd);
@@ -172,6 +262,11 @@ namespace Communication
         }
     }
 
+    /**
+     * @brief Remove listener from EPOLL events listeners
+     * 
+     * @param listener the listener to remove 
+     */
     void ServerSocket::removeEventListener(ISocketEventListener *listener) {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
             if (eventListeners[i] == listener) {
@@ -181,57 +276,100 @@ namespace Communication
         }
     }
 
+    /**
+     * @brief Add listener to EPOLL events listeners
+     * 
+     * @param listener the listener to add 
+     */
     void ServerSocket::addEventListener(ISocketEventListener *listener) {
         eventListeners.push_back(listener);
     }
 
-    // Socket Events
-    void ServerSocket::raiseClientDisconnectedEvent(int socket) const {
+    /**
+     * @brief Dispatch client disconnected event 
+     * 
+     * @param fd socket file description 
+     */
+    void ServerSocket::raiseClientDisconnectedEvent(int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
-            eventListeners[i]->onDisconnect(socket);
+            eventListeners[i]->onDisconnect(fd);
         }
     }
 
-    void ServerSocket::raiseClientConnectedEvent(int socket) const {
+    /**
+     * @brief Dispatch client connected event
+     * 
+     * @param fd socket file description
+     */
+    void ServerSocket::raiseClientConnectedEvent(int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
-            eventListeners[i]->onConnect(socket);
+            eventListeners[i]->onConnect(fd);
         }
     }
 
+    /**
+     * @brief Dispatch data send event
+     * 
+     * @param data data attach to the event 
+     * @param fd socket file description
+     */
     void ServerSocket::raiseDataSendEvent(const std::vector<char> &data, int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
             eventListeners[i]->onDataSend(fd, data);
         }
     }
 
+    /**
+     * @brief Dispatch data received event
+     * 
+     * @param data data attach to the event
+     * @param fd socket file description
+     */
     void ServerSocket::raiseDataReceivedEvent(const std::vector<char> &data, int fd) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
             eventListeners[i]->onDataReceive(fd, data);
         }
     }
 
+    /**
+     * @brief Dispatch EPOLL exception event
+     * 
+     * @param exception exception to raised
+     */
     void ServerSocket::raiseSocketExceptionEvent(SocketException exception) const {
         for (unsigned int i = 0; i < eventListeners.size(); i++) {
             eventListeners[i]->onSocketException(exception);
         }
     }
 
-    ClientSocket::ClientSocket(unsigned int port) : Socket(port)
+    /**
+     * @brief Construct a new Client Socket:: Client Socket object
+     * 
+     * @param port client selected port
+     */
+    ClientSocket::ClientSocket(unsigned int port, std::string address) : Socket(port, address)
     {
 
     }
 
+    /**
+     * @brief Construct a new Thread Pool:: Thread Pool object
+     * 
+     * @param number_of_thread number of thread to be used by the pool
+     * @param process how a packet is process
+     */
     ThreadPool::ThreadPool(int number_of_thread, processPacket process)
     {
-        std::cout << "Thread pool initialize with " << std::to_string(number_of_thread) <<  std::endl;
-        // Initialize all availables threads
         for(int i = 0; i < number_of_thread; i++)
         {  
-            // Create new thread and share the mutex and the queue 
             this->threads.push_back(std::thread(ThreadPool::threadWork, i, &this->terminate_pool, &this->condition, &this->queueMutex, &this->packets, process));
         }
     }
 
+    /**
+     * @brief Destroy the Thread Pool:: Thread Pool object
+     * 
+     */
     ThreadPool::~ThreadPool()
     {
         if(this->stopped == false){
@@ -239,6 +377,11 @@ namespace Communication
         }    
     }
     
+    /**
+     * @brief Add packet to be process by the thread poll 
+     * 
+     * @param packet 
+     */
     void ThreadPool::addPacket(Packet packet)
     {
         {
@@ -248,6 +391,10 @@ namespace Communication
         this->condition.notify_one();
     }
 
+    /**
+     * @brief Shutdown thread poll (join all thread)
+     * 
+     */
     void ThreadPool::shutdown()
     {
         {
@@ -255,24 +402,32 @@ namespace Communication
             this->terminate_pool = true;
         }
 
-        this->condition.notify_all(); // wake up all threads.
+        this->condition.notify_all();
 
-        // Join all threads.
         for(std::thread &every_thread : this->threads)
         {   
             every_thread.join();
         }
 
         this->threads.clear();  
-        this->stopped = true; // use this flag in destructor, if not set, call shutdown() 
+        this->stopped = true; 
     }
 
+    /**
+     * @brief Thread job (take packet in the packets queue and process it) 
+     * 
+     * @param threadID thread id in the pool
+     * @param terminate_pool flag, if the pool want to shutdown
+     * @param condition for concurrent access on the packets std::queue
+     * @param queueMutex for concurrent access on the packets std::queue
+     * @param packets std::queue for packets internal transmission
+     * @param process how to process a packet
+     */
     void ThreadPool::threadWork(int threadID, bool* terminate_pool, std::condition_variable* condition, std::mutex* queueMutex, std::queue<Packet>* packets, processPacket process)
     {
         while(true){
             {
                 std::unique_lock<std::mutex> lock(*queueMutex);
-                // The thread block when mutex is lock or queue is empty
                 condition->wait(lock, [packets, terminate_pool]{return !packets->empty() || *terminate_pool; });
                 Packet packet = packets->front();
                 packets->pop();
@@ -282,35 +437,52 @@ namespace Communication
         }
     }
 
-    Server::Server(unsigned int port, int number_of_thread, processPacket process) : masterSocket(port), threadPool(number_of_thread, process)
+    /**
+     * @brief Construct a new Server:: Server object
+     * 
+     * @param port the to listen on
+     * @param debugPort for console output
+     * @param number_of_thread max number of thread for the pool
+     * @param process how to process a packet 
+     */
+    Server::Server(unsigned int port, unsigned int debugPort, int number_of_thread, processPacket process) : masterSocket(port), threadPool(number_of_thread, process)
     {
         this->masterSocket.addEventListener(this);
         this->masterSocket.run();
     }
 
+    /**
+     * @brief Log message to the debug console (on the debugSocket)
+     * 
+     * @param message 
+     */
+    void Server::log(std::string message)
+    {
+        std::cout << message << std::endl;
+    }
+
     void Server::onConnect(int fd)
     {
-        std::cout << "New client connected" << std::endl;
+        this->log("New client connected");
     }
 
     void Server::onDisconnect(int fd)
     {
-        std::cout << "Client disconnected" << std::endl;
+        this->log("Client disconnected");
     }
 
     void Server::onDataSend(int fd, const std::vector<char>& data)
     {
-        std::cout << "Client sending data." << std::endl;
+        this->log("Client sending data");
     }
 
     void Server::onDataReceive(int fd, const std::vector<char>& data)
     {
-        std::cout << "Received from fd " << fd << ": ";
         this->threadPool.addPacket(Packet{fd, std::string(data.begin(), data.end())});
     }
 
     void Server::onSocketException(SocketException exception)
     {
-        std::cout << exception.message << std::endl;
+        this->log(exception.message);
     }
 }

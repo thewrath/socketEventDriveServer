@@ -1,0 +1,4 @@
+<map id="Communication::ServerSocket::addEventListener" name="Communication::ServerSocket::addEventListener">
+<area shape="rect" id="node1" title="Add listener to EPOLL events listeners." alt="" coords="228,5,447,47"/>
+<area shape="rect" id="node2" href="$class_communication_1_1_server.html#a275c9cc185fd6cbce86dc58834c4055d" title="Construct a new Server:: Server object." alt="" coords="5,5,180,47"/>
+</map>

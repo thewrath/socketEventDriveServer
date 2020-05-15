@@ -1,23 +1,37 @@
-#ifndef SERVER_HPP
-#define SERVER_HPP
+/**
+ * \file Communication.hpp
+ * \brief Package de communication
+ * \author thewrath
+ * \version 1.0
+ * \date 20/04/2020
+ *
+ * Package pour la communication en TCP avec plusieurs clients.
+ *
+ */
 
-#include <iostream>
-#include <string.h>
-#include <thread>
-#include <vector>
+#ifndef COMMUNICATION_HPP
+#define COMMUNICATION_HPP
 
-#include <stdio.h>
-#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
-#include <errno.h>
-
 #include <sys/epoll.h>
+
+#include <stdio.h>
+#include <errno.h>
 #include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
+
 #include <mutex>
-#include <condition_variable>
+#include <thread>
+#include <vector>
 #include <queue>
+#include <condition_variable>
+
+#include <iostream>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 
 namespace Communication 
 {
@@ -54,6 +68,7 @@ namespace Communication
 
         public:
             Socket(unsigned int);
+            Socket(unsigned int, std::string);
             static void write(Packet);
 
             static void setNonBlocking(int);
@@ -88,9 +103,13 @@ namespace Communication
     class ClientSocket : public Socket
     {
         public:
-            ClientSocket(unsigned int);
+            ClientSocket(unsigned int, std::string);
     };
 
+    /**
+     * @brief Function definition, need to be implements by the businness part of the server (it receive a packet to process)
+     * 
+     */
     typedef void (* processPacket)(Packet packet);
 
     class ThreadPool {
@@ -118,8 +137,10 @@ namespace Communication
             ServerSocket masterSocket;
             ThreadPool threadPool;
 
+            void log(std::string);
+
         public:
-            Server(unsigned int, int, processPacket);
+            Server(unsigned int, unsigned int, int, processPacket);
 
             void onConnect(int fd) override;
             void onDisconnect(int fd) override;

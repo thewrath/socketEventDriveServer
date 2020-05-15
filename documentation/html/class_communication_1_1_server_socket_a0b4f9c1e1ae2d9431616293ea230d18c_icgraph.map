@@ -1,0 +1,4 @@
+<map id="Communication::ServerSocket::run" name="Communication::ServerSocket::run">
+<area shape="rect" id="node1" title="configure EPOLL file descriptors and listen for EPOLL events and log messages" alt="" coords="228,13,475,39"/>
+<area shape="rect" id="node2" href="$class_communication_1_1_server.html#a275c9cc185fd6cbce86dc58834c4055d" title="Construct a new Server:: Server object." alt="" coords="5,5,180,47"/>
+</map>
