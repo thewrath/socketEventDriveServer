@@ -1,4 +1,4 @@
-CFLAGS = -g -std=c++17 -fpermissive -pthread -lprotobuf -Wall -Werror -ljsoncpp
+CFLAGS = -g -std=c++17 -fpermissive -pthread -Wall -Werror -ljsoncpp
 LIB_DIR = lib/
 LIBS= 
 SRC_DIR = src/
